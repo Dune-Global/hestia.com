@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { MdPerson } from "react-icons/md";
 
 export default function Home() {
   return (

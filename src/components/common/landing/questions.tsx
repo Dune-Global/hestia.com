@@ -92,7 +92,7 @@ export default function Questions() {
         </div>
 
         <div className="flex">
-          <Button className=" text-hgray-950 bg-hgray-0 border border-hgray-900">
+          <Button variant={"outline"} className=" ">
             Connect with a Superhost
           </Button>
         </div>

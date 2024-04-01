@@ -1,3 +1,4 @@
+import Container from "@/components/common/Container";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,5 +11,9 @@ export default function LandLordLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div>{children}</div>;
+  return (
+    <div>
+      <Container>{children}</Container>
+    </div>
+  );
 }

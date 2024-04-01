@@ -298,8 +298,9 @@ const SignupForm = (props: Props) => {
 
               <div className="flex">
                 <Button
+                variant={"fillBlack"}
                   type="submit"
-                  className="w-full bg-hgray-900 text-hgray-0"
+                  className="w-full bg-gray-900 text-gray-50"
                 >
                   Sign Up
                 </Button>

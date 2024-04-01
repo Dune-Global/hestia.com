@@ -16,7 +16,7 @@ export default function SignIn() {
           </div>
         </div>
         <div className="flex flex-col  lg:flex-row justify-between ">
-          <div className="flex h-[600px] justify-center  ">
+          <div className="flex lg:h-[600px] justify-center  ">
             <Image
               src={"/assets/images/signin_signup/image.png"}
               alt=""

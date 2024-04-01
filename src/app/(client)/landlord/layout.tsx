@@ -12,8 +12,10 @@ export default function LandLordLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
-      <Container>{children}</Container>
+    <div className="flex flex-col min-h-screen relative">
+      <Container>
+      {children}
+      </Container>
     </div>
   );
 }

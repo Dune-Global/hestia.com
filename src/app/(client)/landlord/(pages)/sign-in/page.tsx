@@ -1,35 +1,27 @@
 import Image from "next/image";
-import SigninForm from "./form";
-import Container from "@/components/common/Container";
+import LandLordSignInCard from "@/components/landLord/LandLordSignInCard";
 
 export default function SignIn() {
   return (
-    <Container>
-      <div className="flex flex-col gap-2 py-4">
-        <div className="flex flex-col gap-3">
-          <div className="lg:text-5xl md:text-4xl text-2xl font-extrabold text-center lg:text-left">
-            List your properties.
-          </div>
-          <div className="md:text-2xl text-xl text-center lg:text-left">
-            Reach hundreds of students by listing your properties on our
-            platform{" "}
-          </div>
-        </div>
-        <div className="flex flex-col  lg:flex-row justify-between ">
-          <div className="flex lg:h-[600px] justify-center  ">
-            <Image
-              src={"/assets/images/signin_signup/image.png"}
-              alt=""
-              width={500}
-              height={50}
-              className=""
-            ></Image>{" "}
-          </div>
-          <div className="flex justify-center h-[600px]">
-            <SigninForm />
-          </div>
+    <div className="flex flex-col justify-between py-10">
+      <div className="flex flex-col gap-4 mb-10 my-3">
+        <p className="text-4xl font-bold">List your properties.</p>
+        <p className="font-light text-sm">
+          Reach hundreds of students by listing your properties on our platform
+        </p>
+      </div>
+
+      <div className="flex flex-row gap-x-28">
+        <Image
+          src={"/assets/images/signin_signup/image.png"}
+          alt=""
+          width={1000}
+          height={70}
+        />
+        <div className="w-full">
+          <LandLordSignInCard />
         </div>
       </div>
-    </Container>
+    </div>
   );
 }

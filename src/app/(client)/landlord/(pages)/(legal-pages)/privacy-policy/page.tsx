@@ -24,7 +24,7 @@ export default function PrivacyPolicy() {
           {Information_Sharing}
           <h1 className="font-semibold  text-lg">Data Security</h1>
           {data}
-          <h1 className="font-semibold  text-lg">Children's Policy </h1>
+          <h1 className="font-semibold  text-lg">Children&aposs Policy </h1>
           {children_policy}
         </div>
       </div>

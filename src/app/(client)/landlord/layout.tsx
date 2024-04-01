@@ -1,4 +1,8 @@
+
 import Navbar from "@/components/common/layout/navbar";
+
+import Container from "@/components/common/Container";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,8 +17,11 @@ export default function LandLordLayout({
 }>) {
   return (
     <div>
+
       <Navbar />
-      {children}
+
+      <Container>{children}</Container>
+
     </div>
   );
 }

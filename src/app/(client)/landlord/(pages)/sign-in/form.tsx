@@ -134,7 +134,8 @@ const SigninForm = (props: Props) => {
               </div>
               <div className="">
                 <Button
-                  className="w-full bg-hgray-900 text-hgray-0"
+                  variant={"fillBlack"}
+                  className="w-full bg-gray-900 text-gray-50"
                   type="submit"
                 >
                   Sign In

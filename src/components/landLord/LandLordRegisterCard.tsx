@@ -5,7 +5,7 @@ import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -19,10 +19,19 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff } from "lucide-react";
 import { signUpSchema } from "@/helpers/validation/landlord/auth";
+import { useToast } from "@/components/ui/use-toast";
+import { registerLandlord } from "@/helpers/api/landlord/auth";
 
 type Props = {};
 
 const LandLordRegisterCard = (props: Props) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -36,12 +45,26 @@ const LandLordRegisterCard = (props: Props) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof signUpSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof signUpSchema>) {
+    try {
+      setIsLoading(true);
+      const res = await registerLandlord(values);
+      if (res.status === 201) {
+        toast({
+          title: "Account created successfully",
+        });
+        setTimeout(() => {
+          router.push("/sign-in");
+        }, 2000);
+      } else {
+        setIsLoading(false);
+        toast({
+          title: "Uh oh! Something went wrong.",
+          description: res.data.message,
+        });
+      }
+    } catch (error) {}
   }
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <div className="flex flex-col gap-4">
@@ -209,7 +232,7 @@ const LandLordRegisterCard = (props: Props) => {
             )}
           />
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" loading={isLoading}>
             Submit
           </Button>
         </form>

@@ -26,3 +26,12 @@ export const signUpSchema = z
     message: "Passwords must match",
     path: ["confirmPassword"],
   });
+
+export const signInSchema = z.object({
+  userName: z.string().min(1, {
+    message: "Please enter your username",
+  }),
+  password: z.string().min(1, {
+    message: "Please enter your password",
+  }),
+});

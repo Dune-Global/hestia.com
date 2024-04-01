@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 
-interface PendingPropertyCardProps {
+interface PropertyCardProps {
   id: number;
   image: string;
   name: string;
@@ -11,23 +11,19 @@ interface PendingPropertyCardProps {
   bedrooms: number;
   beds: number;
   bathrooms: number;
-  handleDelete?: () => void;
-  handleEdit?: () => void;
 }
 
-const PendingPropertyCard: React.FC<PendingPropertyCardProps> = ({
+const PropertyCard: React.FC<PropertyCardProps> = ({
   id,
   image,
   name,
   location,
   bedrooms,
   beds,
-  bathrooms,
-  handleDelete,
-  handleEdit,
+  bathrooms
 }) => {
   return (
-    <div className="p-4 flex flex-col gap-1 border border-hgray-400 rounded-lg max-w-80">
+    <div className="p-4 flex flex-col gap-1">
       <div>
         <Image
           src={image}
@@ -46,20 +42,8 @@ const PendingPropertyCard: React.FC<PendingPropertyCardProps> = ({
         <div>-</div>
         <div>{bathrooms} bathroom</div>
       </div>
-      <div className="flex gap-3">
-        <div>
-          <Button variant="fillBlack" size="sm" onClick={handleEdit}>
-            Edit
-          </Button>
-        </div>
-        <div>
-          <Button variant="outline" size="sm" onClick={handleDelete}>
-            Delete
-          </Button>
-        </div>
-      </div>
     </div>
   );
 };
 
-export default PendingPropertyCard;
+export default PropertyCard;

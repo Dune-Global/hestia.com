@@ -6,7 +6,7 @@ import { NavigationMenu } from "@radix-ui/react-navigation-menu";
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 export default function NavDropdown() {
   return (
-    <div className="">
+    <div className="flex">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/common/layout/navbar";
 
 import Container from "@/components/common/Container";
@@ -16,13 +15,9 @@ export default function LandLordLayout({
   children: React.ReactNode;
 }>) {
   return (
-
-
     <div className="flex flex-col min-h-screen relative">
-      <Container>
-      {children}
-      </Container>
-
+      <Navbar />
+      <Container>{children}</Container>
     </div>
   );
 }

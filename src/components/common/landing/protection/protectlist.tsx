@@ -100,7 +100,7 @@ export default function ProtectList() {
           {Comparison}
         </div>
         <div className="flex justify-center">
-          <Button className="text-hgray-950 bg-hgray-0 border border-hgray-900">
+          <Button variant={"outline"} >
             Learn More
           </Button>
         </div>

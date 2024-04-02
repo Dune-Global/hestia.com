@@ -15,6 +15,7 @@ const pages = [
     title: "Approved",
     path: "/landlord/approved-properties",
   },
+  
 ];
 
 export default pages;

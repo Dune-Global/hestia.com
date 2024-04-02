@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -18,10 +18,24 @@ import {
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { signInSchema } from "@/helpers/validation/landlord/auth";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const LandLordSignInCard = (props: Props) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const session = useSession();
+  const { toast } = useToast();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.replace("./");
+    }
+  });
+
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -30,11 +44,39 @@ const LandLordSignInCard = (props: Props) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof signInSchema>) {
-    console.log(values);
-  }
+  async function onSubmit(values: z.infer<typeof signInSchema>) {
+    setLoading(true);
+    const res = await signIn("credentials", {
+      redirect: false,
+      userName: values.userName,
+      password: values.password,
+    });
 
-  const [showPassword, setShowPassword] = useState(false);
+    if (res?.error) {
+      setLoading(false);
+      if (res.error === "CredentialsSignin") {
+        toast({
+          title: "Invalid credentials",
+          description: "Please check your username and password",
+        });
+        return;
+      }
+      toast({
+        title: "Uh oh! Something went wrong",
+        description: res.error,
+      });
+      if (res?.url) {
+        toast({
+          title: "Welcome back!",
+        });
+        setTimeout(() => {
+          router.replace("./");
+        }, 2000);
+      }
+    } else {
+      console.error(res?.error);
+    }
+  }
 
   return (
     <div className="shadow-lg p-10 rounded-md">
@@ -95,7 +137,7 @@ const LandLordSignInCard = (props: Props) => {
                 )}
               />
 
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full" loading={loading}>
                 Submit
               </Button>
             </form>

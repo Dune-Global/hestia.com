@@ -1,3 +1,4 @@
+import { UserRoles } from "@/enum/UserRoles";
 import mongoose, { models } from "mongoose";
 
 const landLordSchema = new mongoose.Schema(
@@ -21,6 +22,11 @@ const landLordSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+    },
+    role: {
+      type: String,
+      required: true,
+      default:UserRoles.LANDLORD
     },
   },
   { timestamps: true }

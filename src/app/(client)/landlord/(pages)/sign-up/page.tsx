@@ -12,12 +12,15 @@ export default function Signup() {
             platform
           </p>
         </div>
-        <Image
-          src={"/assets/images/signin_signup/image.png"}
-          alt=""
-          width={1000}
-          height={70}
-        />
+        <div className="hidden sm:block">
+          <Image
+            src={"/assets/images/signin_signup/image.png"}
+            alt=""
+            width={1000}
+            height={70}
+            className="hidden sm:block"
+          />
+        </div>
       </div>
       <div className="w-full">
         <LandLordRegisterCard />

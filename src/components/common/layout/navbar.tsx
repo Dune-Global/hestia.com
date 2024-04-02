@@ -3,7 +3,6 @@
 import Image from "next/image";
 import NavDropdown from "../navbar-dropdown/nav-dropdown";
 import NavigationMenuHamburger from "../navbar-dropdown/nav-hamburger";
-import { CircleUser } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import Container from "../Container";
 const Navbar = () => {
@@ -30,8 +29,8 @@ const Navbar = () => {
                   {isMobile && <NavigationMenuHamburger />}
                 </div>
                 {/* <div className="flex ">
-                  
                 </div> */}
+
               </div>
             </div>
           </div>

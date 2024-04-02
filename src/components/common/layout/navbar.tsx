@@ -14,8 +14,8 @@ const Navbar = () => {
       <div>
         <Container>
           <div className=" ">
-            <div className="flex flex-row  pt-">
-              <div className="flex flex-row gap-56  ">
+            <div className=" pt-">
+              <div className="flex flex-row justify-between ">
                 <div className="flex h- py-3 ">
                   <Image
                     src="/assets/images/footer/Logo.png"
@@ -24,12 +24,14 @@ const Navbar = () => {
                     height={120}
                   />
                 </div>
-                <div className="flex ">
+                <div className=" flex flex-row items-center ">
+                  {!isMobile && <NavDropdown />}
+
                   {isMobile && <NavigationMenuHamburger />}
                 </div>
-              </div>
-              <div className=" flex flex-row items-center ">
-                {!isMobile && <NavDropdown />}
+                {/* <div className="flex ">
+                  
+                </div> */}
               </div>
             </div>
           </div>

@@ -1,7 +1,30 @@
+"use client";
+import { useEffect } from "react";
 import LandLordRegisterCard from "@/components/landLord/LandLordRegisterCard";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import Loader from "@/components/common/layout/loader";
 
 export default function Signup() {
+  const { data: session, status: sessionStatus }: any = useSession();
+
+  useEffect(() => {
+    if (
+      sessionStatus === "authenticated" &&
+      session?.user?.role === "landlord"
+    ) {
+      redirect("./");
+    }
+  }, [session, sessionStatus]);
+
+  if (sessionStatus === "loading")
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+
   return (
     <div className="flex flex-col sm:flex-row gap-x-28 py-10 justify-between">
       <div className="">

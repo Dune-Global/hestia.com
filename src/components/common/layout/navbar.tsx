@@ -7,15 +7,19 @@ import { useMediaQuery } from "react-responsive";
 import Container from "../Container";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useState } from "react";
-import { PageLinks, PageLinks2 } from "@/data/pages";
-import pages from "@/data/pages/pages2";
+import { RxAvatar } from "react-icons/rx";
+import NavigationLinks from "./navigationLinks";
+import { useSession } from "next-auth/react";
+
 const Navbar = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session }: { data: any } = useSession();
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div className="py-">
       <div>
@@ -36,10 +40,13 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center gap-2 ">
+                  {session?.user.userName}
                   <div className="flex">
                     <button onClick={handleClick}>
                       <Avatar>
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarFallback>
+                          <RxAvatar size={30} />
+                        </AvatarFallback>
                       </Avatar>
                     </button>
 
@@ -48,16 +55,7 @@ const Navbar = () => {
                         isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                       }`}
                     >
-                      {PageLinks2.map((pages2, index) => (
-                        <a
-                          key={index}
-                          href={pages2.path}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          role="menuitem"
-                        >
-                          {pages2.title}
-                        </a>
-                      ))}
+                      <NavigationLinks />
                     </div>
                   </div>
                   <div className="flex">

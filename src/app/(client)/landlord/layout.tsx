@@ -14,7 +14,7 @@ export default function LandLordLayout({
   return (
     <div className="flex flex-col min-h-screen relative">
       <Container>
-      {children}
+        {children}
       </Container>
     </div>
   );

@@ -36,7 +36,7 @@ export default function Apartments() {
         <div className="flex flex-col gap-4 md:w-[800px] ">
           <div className="justify-center flex text-center">{Apartment}</div>
           <div className="flex justify-center">
-            <Button className="text-hgray-950 bg-hgray-0 border border-hgray-900">
+            <Button variant={"outline"} className="">
               Learn More
             </Button>
           </div>

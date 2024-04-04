@@ -12,12 +12,12 @@ import { Button } from "@/components/ui/button";
 export default function ProtectList() {
   return (
     <div className=" flex flex-col gap-8 p-8 px-14">
-      <div className="flex lg:gap-64 md:px-28 md:gap-44  justify-end  text-sm sm:gap-16 sm:px-6 gap-2 ">
+      <div className="flex lg:gap-56 md:px-20 md:gap-36  justify-end  text-sm sm:gap-16 sm:px-6 gap-2 ">
         <div className="flex">Hestia</div>
         <div className="flex ">Competitors</div>
       </div>
       {/*  */}
-      <div className="w-auto bg-hgray-300 h-0.5 "></div>
+      <div className="w-auto bg-gray-300 h-0.5 "></div>
 
       <div className="flex font-bold text-lg ">Guest identity verification</div>
       <div className="flex items-center  ">
@@ -32,7 +32,7 @@ export default function ProtectList() {
         </div>
       </div>
 
-      <div className="w-auto bg-hgray-300 h-0.5 "></div>
+      <div className="w-auto bg-gray-300 h-0.5 "></div>
       {/*  */}
       {/*  */}
       <div className="flex font-bold text-lg">Reservation screening</div>
@@ -48,7 +48,7 @@ export default function ProtectList() {
           </div>
         </div>
       </div>
-      <div className="w-auto bg-hgray-300 h-0.5 "></div>
+      <div className="w-auto bg-gray-300 h-0.5 "></div>
       {/*  */}
       {/*  */}
       <div className="flex font-bold text-lg ">Damage protection</div>
@@ -63,7 +63,7 @@ export default function ProtectList() {
           </div>
         </div>
       </div>
-      <div className="w-auto bg-hgray-300 h-0.5 "></div>
+      <div className="w-auto bg-gray-300 h-0.5 "></div>
       {/*  */}
       {/*  */}
       <div className="flex font-bold text-lg">Liability insurance</div>
@@ -78,7 +78,7 @@ export default function ProtectList() {
           </div>
         </div>
       </div>
-      <div className="w-auto bg-hgray-300 h-0.5 "></div>
+      <div className="w-auto bg-gray-300 h-0.5 "></div>
       {/*  */}
       {/*  */}
       <div className="flex font-bold text-lg">24-hour safety line</div>
@@ -93,16 +93,14 @@ export default function ProtectList() {
           </div>
         </div>
       </div>
-      <div className="w-auto bg-hgray-300 h-0.5 "></div>
+      <div className="w-auto bg-gray-300 h-0.5 "></div>
       {/*  */}
       <div className="flex flex-col gap-4">
         <div className="justify-center flex text-center text-base">
           {Comparison}
         </div>
         <div className="flex justify-center">
-          <Button className="text-hgray-950 bg-hgray-0 border border-hgray-900">
-            Learn More
-          </Button>
+          <Button variant={"outline"}>Learn More</Button>
         </div>
       </div>
     </div>

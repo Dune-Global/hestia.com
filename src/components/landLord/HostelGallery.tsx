@@ -1,8 +1,6 @@
 import React from 'react'
 
-type Props = {}
-
-export default function HostelGallery({ }: Readonly<Props>) {
+export default function HostelGallery() {
     return (
         <div>
             <div className='flex flex-col md:flex-row gap-1 w-full rounded-lg'>
@@ -15,7 +13,7 @@ export default function HostelGallery({ }: Readonly<Props>) {
                     />
                 </div>
 
-                <div className='flex flex-col gap-1 md:max-w-md lg:max-w-xl'>
+                <div className='flex flex-col gap-1 md:max-w-md lg:max-w-2xl'>
 
                     <div className='flex flex-row w-full gap-1'>
                         <img

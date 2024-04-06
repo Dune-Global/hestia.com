@@ -3,7 +3,11 @@ import mongoose, { models } from "mongoose";
 
 const wardenSchema = new mongoose.Schema(
   {
-    fullName: {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
       type: String,
       required: true,
     },

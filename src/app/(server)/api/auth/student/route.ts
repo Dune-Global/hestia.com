@@ -1,21 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
-import LandLordModel from "@/app/(server)/models/landLord";
+import StudentModel from "@/app/(server)/models/student";
 import { monogoConnect } from "@/app/(server)/config/db";
 import bcrypt from "bcrypt";
 import { HttpStatusCode } from "axios";
 import { UserRoles } from "@/enum/UserRoles";
 
 export const POST = async (request: NextRequest) => {
-  const { fullName, userName, email, phoneNumber, password } =
-    await request.json();
+  const {
+    firstName,
+    lastName,
+    userName,
+    email,
+    universityEmail,
+    phoneNumber,
+    password,
+  } = await request.json();
 
   try {
     await monogoConnect();
 
-    const existingLandLord = await LandLordModel.findOne({ email });
-    const userNameExist = await LandLordModel.findOne({ userName });
+    const existingStudent = await StudentModel.findOne({ email });
+    const userNameExist = await StudentModel.findOne({ userName });
 
-    if (existingLandLord) {
+    if (existingStudent) {
       return NextResponse.json(
         { message: "Email exist" },
         { status: HttpStatusCode.Conflict }
@@ -29,19 +36,21 @@ export const POST = async (request: NextRequest) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const newLandLord = new LandLordModel({
-      fullName,
+    const newStudent = new StudentModel({
+      firstName,
+      lastName,
       userName,
       email,
+      universityEmail,
       phoneNumber,
       password: hashedPassword,
-      role: UserRoles.LANDLORD,
+      role: UserRoles.STUDENT,
     });
 
-    await newLandLord.save();
+    await newStudent.save();
 
     return NextResponse.json(
-      { message: "Account created successfully" },
+      { message: "Student account created successfully" },
       {
         status: HttpStatusCode.Created,
       }

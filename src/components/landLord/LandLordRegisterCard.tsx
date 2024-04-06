@@ -63,7 +63,9 @@ const LandLordRegisterCard = (props: Props) => {
           description: res.data.message,
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

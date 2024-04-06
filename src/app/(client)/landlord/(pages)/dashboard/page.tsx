@@ -3,6 +3,8 @@
 import DashboardPropertyCard from "@/components/common/cards/DashboardPropertyCard";
 import FeatureCard from "@/components/common/cards/FeatureCard";
 import PageHeader from "@/components/common/layout/PageHeader";
+import LandLordBookigsCard from "@/components/landLord/LandLordBookigsCard";
+import { bookings } from "@/data/landlord/landlordBookings";
 import { totals } from "@/data/landlord/totals";
 
 export default function Dashboard() {
@@ -52,17 +54,14 @@ export default function Dashboard() {
                     <div className='p-5 border-2 border-gray-300 rounded-lg lg:max-w-xs lg:flex-1'>
                         <h2 className='pb-5 text-xl font-bold text-center'>Bookings</h2>
                         <div>
-                            <div className='flex flex-row justify-between items-center border-b-2 border-hgray-300 py-2'>
-                                <div className='flex flex-row gap-2 md:gap-16 lg:gap-4 items-center'>
-                                    <div className='w-8 h-8 rounded-full border-2' />
-                                    <div className='text-sm text-hgray-500'>Dilantha Wijesinghe</div>
-                                </div>
-                                <div className='text-sm text-hgreen-400'>
-                                    Approved
-                                </div>
-                            </div>
+                            {bookings.slice(0, 8).map((booking) => (
+                                <LandLordBookigsCard key={booking.id} name={booking.name} status={booking.status} />
+                            ))}
                         </div>
                     </div>
+                </div>
+                <div className="pb-10">
+                    <div className="border-2 border-gray-300 rounded-lg w-full h-96"></div>
                 </div>
             </div>
         </>

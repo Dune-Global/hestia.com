@@ -7,10 +7,10 @@ import { MdPerson } from "react-icons/md";
 import { BiSolidMessage } from "react-icons/bi";
 import PropertyCard from "@/components/common/cards/PropertyCard";
 
-export default function PendingPropertiesPage() {
+export default function ApprovedPropertiesPage() {
   return (
     <Container>
-      <PageHeader title="Pending Properties" />
+      <PageHeader title="Approved Properties" />
       <div className="pb-16 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-8">
         {Properties.map((property) => (
           <div key={property.id} className="border border-hgray-400 rounded-lg">

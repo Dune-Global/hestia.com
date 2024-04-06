@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-export default function HostelGallery({ }: Props) {
+export default function HostelGallery({ }: Readonly<Props>) {
     return (
         <div>
             <div className='flex flex-col md:flex-row gap-1 w-full rounded-lg'>
@@ -48,8 +48,8 @@ export default function HostelGallery({ }: Props) {
             </div>
             <div className='py-3'>
                 <div className='flex flex-col gap-1 md:gap-0'>
-                    <h4 className='text-lg'>Room in hostel in Pitipana, Sri Lanka</h4>
-                    <div className='flex text-gray-500 gap-1'>
+                    <h4 className='text-sm md:text-lg'>Room in hostel in Pitipana, Sri Lanka</h4>
+                    <div className='flex text-xs md:text-base text-gray-500 gap-1'>
                         <span>2 Guests</span>
                         <span>-</span>
                         <span>1 Bedroom</span>

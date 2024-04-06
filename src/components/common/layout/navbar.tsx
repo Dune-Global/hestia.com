@@ -26,8 +26,8 @@ const Navbar = ({ roleType }: NavbarProps) => {
   };
 
   return (
-    <div className="py-">
-      <div>
+    <div className="flex flex-col ">
+      <div className=" ">
         <Container>
           <div className=" ">
             <div className=" pt-">
@@ -60,7 +60,7 @@ const Navbar = ({ roleType }: NavbarProps) => {
                         isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                       }`}
                     >
-                      <NavigationLinks role={roleType}/>
+                      <NavigationLinks role={roleType} />
                     </div>
                   </div>
                   <div className="flex">
@@ -68,11 +68,12 @@ const Navbar = ({ roleType }: NavbarProps) => {
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
         </Container>
       </div>
-      <div className="bg-gray-400 h-[0.5px]"></div>
+      <div className="bg-gray-400 h-[0.5px] flex"></div>
     </div>
   );
 };

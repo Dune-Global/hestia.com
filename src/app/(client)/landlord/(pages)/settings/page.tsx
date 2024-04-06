@@ -18,6 +18,7 @@ export default function Setting() {
   const { toast } = useToast();
 
   // State to hold token validity & data
+
   // const [tokenValid, setTokenValid] = useState(false);
   const [landllordData, setlandlordrData] = useState<
     ILandlordDetailsData | any
@@ -158,67 +159,68 @@ export default function Setting() {
 
   return (
     <>
-    <Container>
-      <div className="border border-gray-500 rounded-lg p-4 w-full">
-        <div className="font-medium py-4 w-full">Account Settings</div>
+      <Container>
+        <PageHeader title="Account Settings" isSearch={false} />
+        <div className="pb-10">
+          <div className="border border-gray-500 rounded-lg p-5 w-full gap-5 ">
+            <div className="flex  w-full  lg:flex-row">
+              <div className="flex-1 flex flex-col gap-10">
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <div className="  ">
+                      <div>First name</div>
+                      <div className="pt-2">
+                        <Input
+                          {...register("firstname")}
+                          className=" rounded-md border-gray-200/40"
+                          placeholder="Your first name"
+                          defaultValue={landllordData?.firstname || ""}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="">
+                    <div>Last name</div>
+                    <div className="pt-2">
+                      <Input
+                        {...register("lastname")}
+                        className="rounded-md border-gray-200/40"
+                        placeholder="Your last name"
+                        defaultValue={landllordData?.lastname || ""}
+                      />
+                    </div>
+                  </div>
 
-        <div className="flex py-4 w-full  lg:flex-row">
-          <div className="flex-1 flex flex-col gap-10">
-            <div className="flex flex-col gap-4">
-              <div>
-                <div className="  ">
-                  <div>First name</div>
-                  <div className="pt-2">
-                    <Input
-                      {...register("firstname")}
-                      className=" rounded-md border-gray-200/40"
-                      placeholder="Your first name"
-                      defaultValue={landllordData?.firstname || ""}
-                    />
+                  <div className=" ">
+                    <div>Email</div>
+                    <div className="pt-2">
+                      <Input
+                        {...register("email")}
+                        className=" rounded-md border-gray-200/40"
+                        placeholder="Email address"
+                        defaultValue={landllordData?.email || ""}
+                      />
+                    </div>
+                  </div>
+                  <div className="">
+                    <div>Phone</div>
+                    <div className="pt-2">
+                      <Input
+                        {...register("phoneNumber")}
+                        className="rounded-md border-gray-200/40"
+                        placeholder="Phone number"
+                        defaultValue={landllordData?.phoneNumber || ""}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="">
-                <div>Last name</div>
-                <div className="pt-2">
-                  <Input
-                    {...register("lastname")}
-                    className="rounded-md border-gray-200/40"
-                    placeholder="Your last name"
-                    defaultValue={landllordData?.lastname || ""}
-                  />
+                <div className="flex ">
+                  <Button>Save Changes</Button>
                 </div>
               </div>
-
-              <div className=" ">
-                <div>Email</div>
-                <div className="pt-2">
-                  <Input
-                    {...register("email")}
-                    className=" rounded-md border-gray-200/40"
-                    placeholder="Email address"
-                    defaultValue={landllordData?.email || ""}
-                  />
-                </div>
-              </div>
-              <div className="">
-                <div>Phone</div>
-                <div className="pt-2">
-                  <Input
-                    {...register("phoneNumber")}
-                    className="rounded-md border-gray-200/40"
-                    placeholder="Phone number"
-                    defaultValue={landllordData?.phoneNumber || ""}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex ">
-              <Button>Save Changes</Button>
             </div>
           </div>
         </div>
-      </div>
       </Container>
     </>
   );

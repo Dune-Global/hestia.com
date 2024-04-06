@@ -1,4 +1,4 @@
-import { registerSchemaWarden } from "@/helpers/validation/warden/auth";
+import { signUpSchema } from "@/helpers/validation/landlord/auth";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -15,32 +15,33 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
-import { registerWarden } from "@/helpers/api/warden/auth";
+import { registerLandlord } from "@/helpers/api/landlord/auth";
 
 type Props = {};
 
-export const WardenRegisterForm = (props: Props) => {
+export const LandLordRegisterForm = (props: Props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof registerSchemaWarden>>({
-    resolver: zodResolver(registerSchemaWarden),
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      fullName: "",
+      userName: "",
       email: "",
       phoneNumber: "",
       password: "",
       confirmPassword: "",
+      agree: true,
     },
   });
 
-  async function onSubmit(values: z.infer<typeof registerSchemaWarden>) {
+  async function onSubmit(values: z.infer<typeof signUpSchema>) {
     try {
       setIsLoading(true);
-      const res = await registerWarden(values);
+      const res = await registerLandlord(values);
       if (res.status === 201) {
         toast({
           title: res.data.message,
@@ -68,12 +69,12 @@ export const WardenRegisterForm = (props: Props) => {
         >
           <FormField
             control={form.control}
-            name="firstName"
+            name="fullName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>First Name</FormLabel>
+                <FormLabel>Full Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter first name" {...field} />
+                  <Input placeholder="Enter full name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -81,12 +82,12 @@ export const WardenRegisterForm = (props: Props) => {
           />
           <FormField
             control={form.control}
-            name="lastName"
+            name="userName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Last Name</FormLabel>
+                <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter last name" {...field} />
+                  <Input placeholder="Enter username" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

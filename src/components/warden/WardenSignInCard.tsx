@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -27,7 +26,6 @@ type Props = {};
 const WardenSignInCard = (props: Props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const session = useSession();
   const { toast } = useToast();
   const router = useRouter();
 
@@ -42,7 +40,7 @@ const WardenSignInCard = (props: Props) => {
 
   async function onSubmit(values: z.infer<typeof signInSchemaWarden>) {
     setLoading(true);
-    const res = await signIn("credentialsWarden", {
+    const res = await signIn("credentialWarden", {
       redirect: false,
       email: values.email,
       password: values.password,
@@ -94,7 +92,7 @@ const WardenSignInCard = (props: Props) => {
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="Enter a your email"
+                        placeholder="Enter your email"
                         {...field}
                       />
                     </FormControl>

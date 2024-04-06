@@ -41,7 +41,7 @@ const Navbar = ({ roleType }: NavbarProps) => {
                   />
                 </div>
                 <div className=" flex flex-row items-center ">
-                  {!isMobile && <NavDropdown />}
+                  {!isMobile && session?.user.role === roleType && <NavDropdown role={roleType}/>}
                 </div>
 
                 <div className="flex items-center gap-2 ">
@@ -64,7 +64,7 @@ const Navbar = ({ roleType }: NavbarProps) => {
                     </div>
                   </div>
                   <div className="flex">
-                    {isMobile && <NavigationMenuHamburger />}
+                    {isMobile && session?.user.role === roleType && <NavigationMenuHamburger role={roleType}/>}
                   </div>
                 </div>
               </div>
@@ -77,4 +77,5 @@ const Navbar = ({ roleType }: NavbarProps) => {
     </div>
   );
 };
+
 export default Navbar;

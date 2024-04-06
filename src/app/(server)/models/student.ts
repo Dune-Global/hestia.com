@@ -3,11 +3,19 @@ import mongoose, { models } from "mongoose";
 
 const studentSchema = new mongoose.Schema(
   {
-    fullName: {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
       type: String,
       required: true,
     },
     userName: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
       type: String,
       required: true,
     },
@@ -16,10 +24,6 @@ const studentSchema = new mongoose.Schema(
       required: true,
     },
     universityEmail: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
       type: String,
       required: true,
     },

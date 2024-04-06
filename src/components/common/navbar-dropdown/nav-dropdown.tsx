@@ -1,42 +1,57 @@
 import React from "react";
 
 import Link from "next/link";
-import { PageLinks } from "@/data/pages";
+import {
+  LandLordLinks,
+  AdminLinks,
+  StudentLinks,
+  WardenLinks,
+} from "@/data/pages";
 import { NavigationMenu } from "@radix-ui/react-navigation-menu";
-import { NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
-export default function NavDropdown() {
+import {
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { UserRoles } from "@/enum/UserRoles";
+
+interface NavDropdownProps {
+  role?: UserRoles;
+}
+
+export default function NavDropdown({ role }: NavDropdownProps) {
+  let links: any;
+  switch (role) {
+    case UserRoles.LANDLORD:
+      links = LandLordLinks;
+      break;
+    case UserRoles.ADMIN:
+      links = AdminLinks;
+      break;
+    case UserRoles.STUDENT:
+      links = StudentLinks;
+      break;
+    case UserRoles.WARDEN:
+      links = WardenLinks;
+      break;
+    default:
+      links = [];
+  }
+
   return (
     <div className="flex">
       <NavigationMenu>
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <Link href={PageLinks[0].path} legacyBehavior passHref className="hover:bg-red-500" >
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {PageLinks[0].title}
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href={PageLinks[1].path} legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {PageLinks[1].title}
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href={PageLinks[2].path} legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {PageLinks[2].title}
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href={PageLinks[3].path} legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {PageLinks[3].title}
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+          {links.map((link: any, index: any) => (
+            <NavigationMenuItem key={index}>
+              <Link href={link.path} legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  {link.title}
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          ))}
         </NavigationMenuList>
       </NavigationMenu>
     </div>

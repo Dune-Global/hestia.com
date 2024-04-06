@@ -37,7 +37,7 @@ export default function Signup() {
         </div>
         <div className="hidden sm:block">
           <Image
-            src={"/assets/images/signin_signup/image.png"}
+            src={"/assets/images/signin_signup/landlord-image.png"}
             alt=""
             width={1000}
             height={70}

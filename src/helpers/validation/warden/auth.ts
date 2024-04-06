@@ -27,9 +27,9 @@ export const signUpSchema = z
     path: ["confirmPassword"],
   });
 
-export const signInSchemaLandLord = z.object({
-  userName: z.string().min(1, {
-    message: "Please enter your username",
+export const signInSchemaWarden = z.object({
+  email: z.string().min(1, {
+    message: "Please enter your email",
   }),
   password: z.string().min(1, {
     message: "Please enter your password",

@@ -17,13 +17,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
-import { signInSchemaLandLord } from "@/helpers/validation/landlord/auth";
+import { signInSchemaWarden } from "@/helpers/validation/warden/auth";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
 type Props = {};
 
-const LandLordSignInCard = (props: Props) => {
+const WardenSignInCard = (props: Props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const session = useSession();
@@ -36,19 +36,19 @@ const LandLordSignInCard = (props: Props) => {
     }
   });
 
-  const form = useForm<z.infer<typeof signInSchemaLandLord>>({
-    resolver: zodResolver(signInSchemaLandLord),
+  const form = useForm<z.infer<typeof signInSchemaWarden>>({
+    resolver: zodResolver(signInSchemaWarden),
     defaultValues: {
-      userName: "",
+      email: "",
       password: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof signInSchemaLandLord>) {
+  async function onSubmit(values: z.infer<typeof signInSchemaWarden>) {
     setLoading(true);
-    const res = await signIn("credentialsLandLord", {
+    const res = await signIn("credentialsWarden", {
       redirect: false,
-      userName: values.userName,
+      email: values.email,
       password: values.password,
     });
 
@@ -57,7 +57,7 @@ const LandLordSignInCard = (props: Props) => {
       if (res.error === "CredentialsSignin") {
         toast({
           title: "Invalid credentials",
-          description: "Please check your username and password",
+          description: "Please check your email and password",
         });
         return;
       }
@@ -95,12 +95,12 @@ const LandLordSignInCard = (props: Props) => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
-                name="userName"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter a unique username" {...field} />
+                      <Input placeholder="Enter a unique email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -148,4 +148,4 @@ const LandLordSignInCard = (props: Props) => {
   );
 };
 
-export default LandLordSignInCard;
+export default WardenSignInCard;

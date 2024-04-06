@@ -10,8 +10,8 @@ export const authOptions: any = {
   // Configure one or more authentication providers
   providers: [
     CredentialProvider({
-      id: "credentials",
-      name: "Credentials",
+      id: "credentialsLandLord",
+      name: "CredentialsLandLord",
       credentials: {
         userName: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
@@ -21,6 +21,35 @@ export const authOptions: any = {
           await monogoConnect();
           const user = await LandLordModel.findOne({
             userName: credentials.userName,
+          });
+
+          if (user) {
+            const isPasswordCorrect = await bcrypt.compare(
+              credentials.password,
+              user.password
+            );
+
+            if (user && isPasswordCorrect) {
+              return user;
+            }
+          }
+        } catch (error: any) {
+          throw new Error(error);
+        }
+      },
+    }),
+    CredentialProvider({
+      id: "credentialWarden",
+      name: "CredentialWarden",
+      credentials: {
+        userName: { label: "email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials: any) {
+        try {
+          await monogoConnect();
+          const user = await LandLordModel.findOne({
+            email: credentials.email,
           });
 
           if (user) {

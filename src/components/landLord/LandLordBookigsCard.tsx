@@ -13,7 +13,7 @@ export default function LandLordBookingsCard({ name, status }: Readonly<Props>) 
     return (
         <div className='flex flex-row justify-between items-center border-b-2 border-gray-300 py-3'>
             <div className='flex flex-row gap-2 md:gap-16 lg:gap-4 items-center'>
-                <img src={`https://ui-avatars.com/api/?name=${name}&background=random`} className='w-8 h-8 rounded-full border border-red-300' alt='profile' />
+                <img src={`https://ui-avatars.com/api/?name=${name}&background=random`} className='w-8 h-8 rounded-full' alt='profile' />
                 <div className='text-sm text-gray-500 max-w-36'>{truncatedName}</div>
             </div>
             <div className={`text-sm text-${statusColor}`}>

@@ -1,11 +1,11 @@
 const pages = [
   {
     title: "Dashboard",
-    path: "/dashboard",
+    path: "/landlord/dashboard",
   },
   {
     title: "Add Property",
-    path: "/add-property",
+    path: "/landlord/add-property",
   },
   {
     title: "Pending",

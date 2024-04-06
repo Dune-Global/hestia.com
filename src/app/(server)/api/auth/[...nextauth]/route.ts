@@ -137,6 +137,8 @@ export const authOptions: any = {
         token.role = user.role;
         token.userName = user.userName;
         token.phoneNumber = user.phoneNumber;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
       }
       return token;
     },

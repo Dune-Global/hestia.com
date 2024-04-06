@@ -45,7 +45,7 @@ const Navbar = ({ roleType }: NavbarProps) => {
                 </div>
 
                 <div className="flex items-center gap-2 ">
-                  {session?.user.role === roleType && session?.user.userName}
+                  {session?.user.role === roleType && (session?.user.userName || session?.user.firstName)}
                   <div className="flex">
                     <button onClick={handleClick}>
                       <Avatar>

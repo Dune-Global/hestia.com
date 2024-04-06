@@ -1,20 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { Home, Building2, UserRound } from "lucide-react";
 import {
-  AdminRegisterForm,
+  LandLordRegisterForm,
   StudentRegisterForm,
   WardenRegisterForm,
 } from "@/components/admin/add-role";
+import { useRouter } from "next/navigation";
+import { UserRoles } from "@/enum/UserRoles";
 
 type Props = {};
 
-function AddRole({}: Props) {
+function AddRole(props: Props) {
   const [selectedRole, setSelectedRole] = useState<string>("Warden");
+  const { data: session, status: sessionStatus }: any = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (sessionStatus === "loading") {
+      return;
+    }
+
+    if (!session) {
+      router.push("/admin/sign-in");
+    } else if (session?.user?.role !== UserRoles.ADMIN) {
+      router.push("/admin/sign-in");
+    }
+  }, [session, sessionStatus, router]);
 
   const roles = [
     { name: "Warden", icon: Home },
-    { name: "Admin", icon: Building2 },
+    { name: "Landlord", icon: Building2 },
     { name: "Student", icon: UserRound },
   ];
 
@@ -31,20 +48,28 @@ function AddRole({}: Props) {
           <p className="font-bold text-lg">Select a role for the user.</p>
           <div className="flex gap-6">
             {roles.map(({ name, icon: Icon }) => (
-              <div
+              <button
                 key={name}
                 onClick={() => setSelectedRole(name)}
-                className={`border rounded-md px-9 py-5 cursor-pointer transition-colors duration-200 ${
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    setSelectedRole(name);
+                  }
+                }}
+                className={`flex flex-col gap-2 border rounded-md px-9 py-5 transition-colors duration-200 ${
                   selectedRole === name
-                    ? "border-gray-600"
-                    : "border-gray-300 hover:bg-gray-100"
+                    ? "border-gray-600 cursor-default"
+                    : "border-gray-300 hover:bg-gray-100 cursor-pointer"
                 }`}
+                tabIndex={0}
               >
-                <div className="flex justify-center">
-                  <Icon />
+                <div className="flex flex-col gap-3">
+                  <div className="flex justify-center">
+                    <Icon />
+                  </div>
+                  <div>{name}</div>
                 </div>
-                <div>{name}</div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -53,7 +78,7 @@ function AddRole({}: Props) {
         <p className="font-bold text-lg">Fill the details below.</p>
         <div className="w-full">
           {selectedRole === "Warden" && <WardenRegisterForm />}
-          {selectedRole === "Admin" && <AdminRegisterForm />}
+          {selectedRole === "Landlord" && <LandLordRegisterForm />}
           {selectedRole === "Student" && <StudentRegisterForm />}
         </div>
       </div>

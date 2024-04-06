@@ -9,7 +9,6 @@ import { monogoConnect } from "@/app/(server)/config/db";
 import bcrypt from "bcrypt";
 
 export const authOptions: any = {
-  // Configure one or more authentication providers
   providers: [
     CredentialProvider({
       id: "credentialsLandLord",
@@ -44,7 +43,7 @@ export const authOptions: any = {
       id: "credentialWarden",
       name: "CredentialWarden",
       credentials: {
-        userName: { label: "email", type: "text" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any) {

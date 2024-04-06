@@ -1,16 +1,45 @@
 "use client";
 import { useState } from "react";
 
-import { PageLinks } from "@/data/pages";
+import {
+  LandLordLinks,
+  WardenLinks,
+  AdminLinks,
+  StudentLinks,
+} from "@/data/pages";
 import ClientOnly from "@/components/client-only";
+import { UserRoles } from "@/enum/UserRoles";
 
+interface NavigationMenuHamburgerProps {
+  role?: UserRoles;
+}
 
-export default function NavigationMenuHamburger() {
+export default function NavigationMenuHamburger({
+  role,
+}: NavigationMenuHamburgerProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+
+  let links:any;
+  switch (role) {
+    case UserRoles.LANDLORD:
+      links = LandLordLinks;
+      break;
+    case UserRoles.WARDEN:
+      links = WardenLinks;
+      break;
+    case UserRoles.ADMIN:
+      links = AdminLinks;
+      break;
+    case UserRoles.STUDENT:
+      links = StudentLinks;
+      break;
+    default:
+      links = [];
+  }
 
   return (
     <ClientOnly>
@@ -46,7 +75,7 @@ export default function NavigationMenuHamburger() {
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {PageLinks.map((page, index) => (
+            {links.map((page:any, index:any) => (
               <a
                 key={index}
                 href={page.path}

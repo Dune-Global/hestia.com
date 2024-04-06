@@ -1,47 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
-import LandLordModel from "@/app/(server)/models/landLord";
+import WardenModel from "@/app/(server)/models/warden";
 import { monogoConnect } from "@/app/(server)/config/db";
 import bcrypt from "bcrypt";
 import { HttpStatusCode } from "axios";
 import { UserRoles } from "@/enum/UserRoles";
 
 export const POST = async (request: NextRequest) => {
-  const { fullName, userName, email, phoneNumber, password } =
+  const { firstName, lastName, email, phoneNumber, password } =
     await request.json();
 
   try {
     await monogoConnect();
 
-    const existingLandLord = await LandLordModel.findOne({ email });
-    const userNameExist = await LandLordModel.findOne({ userName });
+    const existingWarden = await WardenModel.findOne({ email });
 
-    if (existingLandLord) {
+    if (existingWarden) {
       return NextResponse.json(
         { message: "Email exist" },
-        { status: HttpStatusCode.Conflict }
-      );
-    } else if (userNameExist) {
-      return NextResponse.json(
-        { message: "Username exist" },
         { status: HttpStatusCode.Conflict }
       );
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const newLandLord = new LandLordModel({
-      fullName,
-      userName,
+    const newWarden = new WardenModel({
+      firstName,
+      lastName,
       email,
       phoneNumber,
       password: hashedPassword,
-      role: UserRoles.LANDLORD,
+      role: UserRoles.WARDEN,
     });
 
-    await newLandLord.save();
+    await newWarden.save();
 
     return NextResponse.json(
-      { message: "Account created successfully" },
+      { message: "Warden account created successfully" },
       {
         status: HttpStatusCode.Created,
       }

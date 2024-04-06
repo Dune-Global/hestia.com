@@ -9,7 +9,7 @@ import Hostinglinks from "@/data/footer/footerhostinglinks";
 import Container from "@/components/common/Container";
 export default function Footer() {
   return (
-    <div className="bg-foreground h-auto ">
+    <div className="bg-[#262626]  h-auto ">
       <Container>
         <div className="gap-y-8 flex flex-col py-5">
           <div className="flex flex-col md:flex-row items-center gap-5 justify-between pt-8 lg:text-base   text-sm text-gray-200 ">
@@ -47,9 +47,9 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-row h-32  md:h-auto justify-center ">
+            <div className="flex flex-row h-48 md:h-auto justify-center ">
               <Image
-                src={"/assets/images/footer/Logo.png"}
+                src={"/assets/images/footer/Logo.svg"}
                 alt="logo"
                 width={400}
                 height={100}

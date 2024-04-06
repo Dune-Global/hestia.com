@@ -17,7 +17,7 @@ const NavigationLinks = ({ role }: Props) => {
         <div>
           <button
             onClick={() => router.push("./sign-in")}
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full"
+            className=" block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full"
             role="menuitem"
           >
             Sign in
@@ -33,7 +33,7 @@ const NavigationLinks = ({ role }: Props) => {
           )}
         </div>
       ) : (
-        <div>
+        <div >
           <button
             onClick={() => router.push("./settings")}
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full"

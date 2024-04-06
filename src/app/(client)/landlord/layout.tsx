@@ -2,6 +2,7 @@ import Navbar from "@/components/common/layout/navbar";
 import Container from "@/components/common/Container";
 
 import type { Metadata } from "next";
+import { UserRoles } from "@/enum/UserRoles";
 
 export const metadata: Metadata = {
   title: "Hestia Landlord",
@@ -15,7 +16,7 @@ export default function LandLordLayout({
 }>) {
   return (
     <div className="flex flex-col min-h-screen relative">
-      <Navbar />
+      <Navbar roleType={UserRoles.LANDLORD} />
       <Container>{children}</Container>
     </div>
   );

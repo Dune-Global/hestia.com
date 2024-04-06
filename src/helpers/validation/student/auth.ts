@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const signInSchemaWarden = z.object({
+export const signInSchemaStudent = z.object({
   email: z.string().min(1, {
     message: "Please enter your email",
   }),

@@ -10,8 +10,13 @@ import { useState } from "react";
 import { RxAvatar } from "react-icons/rx";
 import NavigationLinks from "./navigationLinks";
 import { useSession } from "next-auth/react";
+import { UserRoles } from "@/enum/UserRoles";
 
-const Navbar = () => {
+type NavbarProps = {
+  roleType?: UserRoles;
+};
+
+const Navbar = ({ roleType }: NavbarProps) => {
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
   const [isOpen, setIsOpen] = useState(false);
   const { data: session }: { data: any } = useSession();
@@ -55,7 +60,7 @@ const Navbar = () => {
                         isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                       }`}
                     >
-                      <NavigationLinks />
+                      <NavigationLinks role={roleType}/>
                     </div>
                   </div>
                   <div className="flex">

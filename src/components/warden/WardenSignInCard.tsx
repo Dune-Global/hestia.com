@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -30,17 +31,12 @@ const WardenSignInCard = (props: Props) => {
   const { toast } = useToast();
   const router = useRouter();
 
-  useEffect(() => {
-    if (session?.status === "authenticated") {
-      router.replace("./");
-    }
-  });
-
   const form = useForm<z.infer<typeof signInSchemaWarden>>({
     resolver: zodResolver(signInSchemaWarden),
     defaultValues: {
       email: "",
       password: "",
+      rememberMe: false,
     },
   });
 
@@ -50,6 +46,8 @@ const WardenSignInCard = (props: Props) => {
       redirect: false,
       email: values.email,
       password: values.password,
+      session: { maxAge: values.rememberMe ? 30 * 24 * 60 * 60 : 24 * 60 * 60 },
+      //if rememberMe is true, set the session to expire in 30 days, else set it to expire in 24 hours
     });
 
     if (res?.error) {
@@ -84,12 +82,6 @@ const WardenSignInCard = (props: Props) => {
         <div className="flex flex-col gap-4 w-full">
           <div className="text-center flex flex-col gap-4">
             <p className="font-bold text-3xl">Sign in</p>
-            <p className="font-light text-sm">
-              Don&apos;t have an account?{" "}
-              <Link href={"./sign-up"} className="underline">
-                Sign up
-              </Link>
-            </p>
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -100,7 +92,11 @@ const WardenSignInCard = (props: Props) => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter a unique email" {...field} />
+                      <Input
+                        type="email"
+                        placeholder="Enter a your email"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -133,6 +129,28 @@ const WardenSignInCard = (props: Props) => {
                       </div>
                     </FormControl>
                     <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="rememberMe"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center space-x-2">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>
+                          <span>Remember me</span>
+                        </FormLabel>
+                      </div>
+                    </div>
                   </FormItem>
                 )}
               />

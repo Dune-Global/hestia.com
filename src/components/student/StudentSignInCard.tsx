@@ -18,33 +18,34 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
-import { signInSchemaLandLord } from "@/helpers/validation/landlord/auth";
+import { signInSchemaStudent } from "@/helpers/validation/student/auth";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
 type Props = {};
 
-const LandLordSignInCard = (props: Props) => {
+const StudentSignInCard = (props: Props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const session = useSession();
   const { toast } = useToast();
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof signInSchemaLandLord>>({
-    resolver: zodResolver(signInSchemaLandLord),
+
+  const form = useForm<z.infer<typeof signInSchemaStudent>>({
+    resolver: zodResolver(signInSchemaStudent),
     defaultValues: {
-      userName: "",
+      email: "",
       password: "",
       rememberMe: false,
     },
   });
 
-  async function onSubmit(values: z.infer<typeof signInSchemaLandLord>) {
+  async function onSubmit(values: z.infer<typeof signInSchemaStudent>) {
     setLoading(true);
-    const res = await signIn("credentialsLandLord", {
+    const res = await signIn("credentialsStudent", {
       redirect: false,
-      userName: values.userName,
+      email: values.email,
       password: values.password,
       session: { maxAge: values.rememberMe ? 30 * 24 * 60 * 60 : 24 * 60 * 60 },
       //if rememberMe is true, set the session to expire in 30 days, else set it to expire in 24 hours
@@ -55,7 +56,7 @@ const LandLordSignInCard = (props: Props) => {
       if (res.error === "CredentialsSignin") {
         toast({
           title: "Invalid credentials",
-          description: "Please check your username and password",
+          description: "Please check your email and password",
         });
         return;
       }
@@ -82,23 +83,21 @@ const LandLordSignInCard = (props: Props) => {
         <div className="flex flex-col gap-4 w-full">
           <div className="text-center flex flex-col gap-4">
             <p className="font-bold text-3xl">Sign in</p>
-            <p className="font-light text-sm">
-              Don&apos;t have an account?{" "}
-              <Link href={"./sign-up"} className="underline">
-                Sign up
-              </Link>
-            </p>
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
-                name="userName"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your username" {...field} />
+                      <Input
+                        type="email"
+                        placeholder="Enter a your email"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -168,4 +167,4 @@ const LandLordSignInCard = (props: Props) => {
   );
 };
 
-export default LandLordSignInCard;
+export default StudentSignInCard;

@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Loader from "@/components/common/layout/loader";
 import WardenSignInCard from "@/components/warden/WardenSignInCard";
+import { UserRoles } from "@/enum/UserRoles";
 
 export default function SignIn() {
   const { data: session, status: sessionStatus }: any = useSession();
@@ -12,7 +13,7 @@ export default function SignIn() {
   useEffect(() => {
     if (
       sessionStatus === "authenticated" &&
-      session?.user?.role === "landlord"
+      session?.user?.role === UserRoles.WARDEN
     ) {
       redirect("./");
     }
@@ -44,7 +45,7 @@ export default function SignIn() {
           />
         </div>
         <div className="w-full">
-          < WardenSignInCard/>
+          <WardenSignInCard />
         </div>
       </div>
     </div>

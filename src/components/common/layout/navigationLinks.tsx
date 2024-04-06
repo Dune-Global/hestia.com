@@ -1,16 +1,19 @@
-import React from 'react'
+import React from "react";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { UserRoles } from "@/enum/UserRoles";
 
-type Props = {}
+type Props = {
+  role?: UserRoles;
+};
 
-const NavigationLinks = (props: Props) => {
-      const router = useRouter();
-      const { data: session }: any = useSession();
+const NavigationLinks = ({ role }: Props) => {
+  const router = useRouter();
+  const { data: session }: any = useSession();
   return (
     <div>
       {" "}
-      {!session ? (
+      {!session || session?.user.role != role ? (
         <div>
           <button
             onClick={() => router.push("./sign-in")}
@@ -19,13 +22,15 @@ const NavigationLinks = (props: Props) => {
           >
             Sign in
           </button>
-          <button
-            onClick={() => router.push("./sign-up")}
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full"
-            role="menuitem"
-          >
-            Sign up
-          </button>
+          {role === UserRoles.LANDLORD && (
+            <button
+              onClick={() => router.push("./sign-up")}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full"
+              role="menuitem"
+            >
+              Sign up
+            </button>
+          )}
         </div>
       ) : (
         <div>
@@ -47,6 +52,6 @@ const NavigationLinks = (props: Props) => {
       )}
     </div>
   );
-}
+};
 
-export default NavigationLinks
+export default NavigationLinks;

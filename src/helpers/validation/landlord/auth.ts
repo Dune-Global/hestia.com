@@ -34,4 +34,5 @@ export const signInSchemaLandLord = z.object({
   password: z.string().min(1, {
     message: "Please enter your password",
   }),
+  rememberMe: z.boolean(),
 });

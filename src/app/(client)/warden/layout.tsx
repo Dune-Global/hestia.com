@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/common/layout/navbar";
 import Container from "@/components/common/Container";
+import { UserRoles } from "@/enum/UserRoles";
 
 export const metadata: Metadata = {
   title: "Hestia Warden",
@@ -12,10 +13,10 @@ export default function WardenLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-    return (
-      <div className="flex flex-col min-h-screen relative">
-        <Navbar />
-        <Container>{children}</Container>
-      </div>
-    );
+  return (
+    <div className="flex flex-col min-h-screen relative">
+      <Navbar roleType={UserRoles.WARDEN} />
+      <Container>{children}</Container>
+    </div>
+  );
 }

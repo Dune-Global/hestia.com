@@ -2,9 +2,11 @@ import NextAuth from "next-auth";
 import { Account, User as AuthUser } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import LandLordModel from "@/app/(server)/models/landLord";
+import WardenModel from "@/app/(server)/models/warden";
+import AdminModel from "@/app/(server)/models/admin";
+import StudentModel from "@/app/(server)/models/student";
 import { monogoConnect } from "@/app/(server)/config/db";
 import bcrypt from "bcrypt";
-import { data } from "@/app/(client)/landlord/(pages)/(legal-pages)/privacy-policy/content";
 
 export const authOptions: any = {
   // Configure one or more authentication providers
@@ -48,7 +50,65 @@ export const authOptions: any = {
       async authorize(credentials: any) {
         try {
           await monogoConnect();
-          const user = await LandLordModel.findOne({
+          const user = await WardenModel.findOne({
+            email: credentials.email,
+          });
+
+          if (user) {
+            const isPasswordCorrect = await bcrypt.compare(
+              credentials.password,
+              user.password
+            );
+
+            if (user && isPasswordCorrect) {
+              return user;
+            }
+          }
+        } catch (error: any) {
+          throw new Error(error);
+        }
+      },
+    }),
+    CredentialProvider({
+      id: "credentialsAdmin",
+      name: "CredentialsAdmin",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials: any) {
+        try {
+          await monogoConnect();
+          const user = await AdminModel.findOne({
+            email: credentials.email,
+          });
+
+          if (user) {
+            const isPasswordCorrect = await bcrypt.compare(
+              credentials.password,
+              user.password
+            );
+
+            if (user && isPasswordCorrect) {
+              return user;
+            }
+          }
+        } catch (error: any) {
+          throw new Error(error);
+        }
+      },
+    }),
+    CredentialProvider({
+      id: "credentialsStudent",
+      name: "credentialsStudent",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials: any) {
+        try {
+          await monogoConnect();
+          const user = await StudentModel.findOne({
             email: credentials.email,
           });
 

@@ -2,10 +2,11 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { UserRoles } from "@/enum/UserRoles";
 
 export default function Landlord() {
-  const { data: session }: any = useSession(); // need await so function need to be async and server
-  if (!session) {
+  const { data: session }: any = useSession(); 
+  if (!session || session.user.role !== UserRoles.LANDLORD) {
     redirect("landlord/sign-in");
   }
 

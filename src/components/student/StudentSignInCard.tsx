@@ -47,8 +47,8 @@ const StudentSignInCard = (props: Props) => {
       redirect: false,
       email: values.email,
       password: values.password,
-      session: { maxAge: values.rememberMe ? 30 * 24 * 60 * 60 : 24 * 60 * 60 },
-      //if rememberMe is true, set the session to expire in 30 days, else set it to expire in 24 hours
+      session: values.rememberMe ? { maxAge: 30 * 24 * 60 * 60 } : null,
+      //if rememberMe is true, set the session to expire in 30 days, else set it to expire when the browser window is closed
     });
 
     if (res?.error) {

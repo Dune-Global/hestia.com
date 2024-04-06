@@ -1,4 +1,3 @@
-import { ILandLordRegisterDTO } from "@/types/landLord";
 import axios from "axios";
 
 export const registerLandlord = async (values:any) => {

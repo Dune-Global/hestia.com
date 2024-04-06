@@ -24,7 +24,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={cn("relative h-full antialiased", inter.className)}>
         <SessionProvider session={session}>
-          <main className="z-20 relative flex flex-col min-h-screen bg-gray-0">
+          <main className="z-20 relative min-h-screen bg-gray-0">
             <Toaster />
             <div>{children}</div>
             <Footer />

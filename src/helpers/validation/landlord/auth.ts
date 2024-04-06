@@ -3,8 +3,8 @@ import { passwordRegex, phoneNumberRegex } from "@/helpers/regex/common/common";
 
 export const signUpSchema = z
   .object({
-    fullName: z.string().min(2, {
-      message: "Full name must be at least 2 characters.",
+    fullName: z.string().min(1, {
+      message: "Full name must be a valid one",
     }),
     userName: z.string().min(2, {
       message: "Username must be at least 2 characters.",

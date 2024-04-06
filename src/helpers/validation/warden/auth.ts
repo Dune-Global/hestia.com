@@ -1,13 +1,23 @@
-import { z } from "zod";
 import { passwordRegex, phoneNumberRegex } from "@/helpers/regex/common/common";
+import { z } from "zod";
 
-export const signUpSchema = z
+export const signInSchemaWarden = z.object({
+  email: z.string().min(1, {
+    message: "Please enter your email",
+  }),
+  password: z.string().min(1, {
+    message: "Please enter your password",
+  }),
+  rememberMe: z.boolean(),
+});
+
+export const registerSchemaWarden = z
   .object({
-    fullName: z.string().min(1, {
-      message: "Full name must be a valid one",
+    firstName: z.string().min(1, {
+      message: "Enter a valid first name",
     }),
-    userName: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+    lastName: z.string().min(1, {
+      message: "Enter a valid last name",
     }),
     email: z.string().email(),
     phoneNumber: z.string().refine((value) => phoneNumberRegex.test(value), {
@@ -18,21 +28,8 @@ export const signUpSchema = z
         "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
     }),
     confirmPassword: z.string(),
-    agree: z.boolean().refine((value) => value === true, {
-      message: "You must agree to the terms and conditions.",
-    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords must match",
     path: ["confirmPassword"],
   });
-
-export const signInSchemaLandLord = z.object({
-  userName: z.string().min(1, {
-    message: "Please enter your username",
-  }),
-  password: z.string().min(1, {
-    message: "Please enter your password",
-  }),
-  rememberMe: z.boolean(),
-});

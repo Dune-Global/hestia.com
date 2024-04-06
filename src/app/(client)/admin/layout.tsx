@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Navbar from "@/components/common/layout/navbar";
+import Container from "@/components/common/Container";
+import { UserRoles } from "@/enum/UserRoles";
 
 export const metadata: Metadata = {
   title: "Hestia Admin",
@@ -10,5 +13,10 @@ export default function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div>{children}</div>;
+  return (
+    <div className="min-h-screen relative">
+      <Navbar roleType={UserRoles.ADMIN} />
+      <Container>{children}</Container>
+    </div>
+  );
 }

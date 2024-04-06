@@ -3,14 +3,13 @@ import { monogoConnect } from "@/app/(server)/config/db";
 import bcrypt from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
 import { HttpStatusCode } from "axios";
+import { UserRoles } from "@/enum/UserRoles";
 
 export const POST = async (request: NextRequest) => {
-
   const { fullName, userName, email, phoneNumber, password } =
     await request.json();
 
-    try {
-
+  try {
     await monogoConnect();
 
     const existingLandLord = await LandLordModel.findOne({ email });
@@ -36,6 +35,7 @@ export const POST = async (request: NextRequest) => {
       email,
       phoneNumber,
       password: hashedPassword,
+      role: UserRoles.LANDLORD,
     });
 
     await newLandLord.save();

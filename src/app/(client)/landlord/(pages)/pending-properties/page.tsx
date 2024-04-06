@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export default function PendingPropertiesPage() {
   return (
-    <Container>
+    <>
       <PageHeader title="Pending Properties" />
       <div className="pb-16 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-8">
         {Properties.map((property) => (
@@ -36,6 +36,6 @@ export default function PendingPropertiesPage() {
           </div>
         ))}
       </div>
-    </Container>
+    </>
   );
 }

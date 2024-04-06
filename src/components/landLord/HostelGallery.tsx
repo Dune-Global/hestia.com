@@ -3,7 +3,7 @@ import React from 'react'
 export default function HostelGallery() {
     return (
         <div>
-            <div className='flex flex-col md:flex-row gap-1 w-full rounded-lg border border-black'>
+            <div className='flex flex-col md:flex-row gap-1 w-full rounded-lg'>
 
                 <div>
                     <img

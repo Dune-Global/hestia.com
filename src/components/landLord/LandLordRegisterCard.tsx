@@ -54,7 +54,7 @@ const LandLordRegisterCard = (props: Props) => {
           title: "Account created successfully",
         });
         setTimeout(() => {
-          router.push("/sign-in");
+          router.push("./sign-in");
         }, 2000);
       } else {
         setIsLoading(false);

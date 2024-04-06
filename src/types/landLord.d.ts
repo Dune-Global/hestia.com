@@ -3,7 +3,7 @@ export interface ILandLord {
   userName: string;
   email: string;
   phoneNumber: string;
-  createDate: Date;
+  role: string;
 }
 
 export interface ILandLordRegisterDTO extends ILandLord {

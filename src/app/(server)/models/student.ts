@@ -1,7 +1,7 @@
 import { UserRoles } from "@/enum/UserRoles";
 import mongoose, { models } from "mongoose";
 
-const landLordSchema = new mongoose.Schema(
+const studentSchema = new mongoose.Schema(
   {
     fullName: {
       type: String,
@@ -12,6 +12,10 @@ const landLordSchema = new mongoose.Schema(
       required: true,
     },
     email: {
+      type: String,
+      required: true,
+    },
+    universityEmail: {
       type: String,
       required: true,
     },
@@ -26,12 +30,11 @@ const landLordSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
-      default:UserRoles.LANDLORD
+      default: UserRoles.STUDENT
     },
   },
   { timestamps: true }
 );
 
-const LandLordModel =
-  models.landLord || mongoose.model("landLord", landLordSchema);
-export default LandLordModel;
+const StudentModel = models.student || mongoose.model("student", studentSchema);
+export default StudentModel;

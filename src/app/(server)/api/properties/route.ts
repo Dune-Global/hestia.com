@@ -35,6 +35,69 @@ export const POST = async (request: NextRequest) => {
   }
 };
 
+export const PUT = async (request: NextRequest) => {
+  const propertyData = await request.json();
+  const propertyId = request.nextUrl.searchParams.get("propertyId");
+
+  try {
+    await monogoConnect();
+
+    const property = await Property.findById(propertyId);
+    if (!property) {
+      throw new Error("Property not found");
+    }
+
+    const updatedProperty = await Property.findByIdAndUpdate(
+      propertyId,
+      propertyData,
+      { new: true }
+    );
+
+    return NextResponse.json(
+      { message: "Property updated successfully", property: updatedProperty },
+      {
+        status: HttpStatusCode.Ok,
+      }
+    );
+  } catch (err: any) {
+    return NextResponse.json(
+      { message: err.message },
+      {
+        status: 500,
+      }
+    );
+  }
+};
+
+export const DELETE = async (request: NextRequest) => {
+  const propertyId = request.nextUrl.searchParams.get("propertyId");
+
+  try {
+    await monogoConnect();
+
+    const property = await Property.findById(propertyId);
+    if (!property) {
+      throw new Error("Property not found");
+    }
+
+    await Property.findByIdAndDelete(propertyId);
+
+    return NextResponse.json(
+      { message: "Property deleted successfully" },
+      {
+        status: HttpStatusCode.Ok,
+      }
+    );
+  } catch (err: any) {
+    return NextResponse.json(
+      { message: err.message },
+      {
+        status: 500,
+      }
+    );
+  }
+};
+
 export const GET = async (request: NextRequest) => {
   const propertyType = request.nextUrl.searchParams.get(
     "propertyType"

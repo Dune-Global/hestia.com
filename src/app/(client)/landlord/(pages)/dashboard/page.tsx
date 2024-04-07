@@ -6,22 +6,26 @@ import PageHeader from "@/components/common/layout/PageHeader";
 import LandLordBookigsCard from "@/components/landLord/LandLordBookigsCard";
 import { bookings } from "@/data/landlord/landlordBookings";
 import { totals } from "@/data/landlord/totals";
-import { getLandlordLatest } from "@/helpers/api/landlord/dashbord";
+import {
+  getLandlordLatest,
+  getPropertyStatus,
+} from "@/helpers/api/landlord/dashbord";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Property } from "@/types/property";
 import Loader from "@/components/common/layout/loader";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { ITotals } from "@/types/landlord-dashboard";
 
 interface PropertiesResponse {
   allProperties: Property[];
   approvedProperties: Property[];
 }
 
-
 export default function Dashboard() {
   const [properties, setProperties] = useState<PropertiesResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [totals, setTotals] = useState<ITotals[]>([]);
   const router = useRouter();
 
   const { data: session, status: sessionStatus }: any = useSession();
@@ -29,13 +33,37 @@ export default function Dashboard() {
   useEffect(() => {
     if (sessionStatus === "loading") return;
 
-    if (!session || session.user.role !== 'landlord') {
+    if (!session || session.user.role !== "landlord") {
       router.push("/landlord/sign-in");
     } else {
       const fetchData = async () => {
         const response = await getLandlordLatest(session.user.id, "both");
         setProperties(response.data as PropertiesResponse);
         console.log(response.data);
+
+        const statusResponse = await getPropertyStatus(session.user.id);
+        if (statusResponse && statusResponse.data) {
+          setTotals([
+            {
+              id: "1",
+              text: String(statusResponse.data.pending),
+              bottomText: "Pending",
+            },
+            {
+              id: "2",
+              text: String(statusResponse.data.approved),
+              bottomText: "Approved",
+            },
+            {
+              id: "3",
+              text: String(statusResponse.data.rejected),
+              bottomText: "Rejected",
+            },
+          ]);
+        } else {
+          console.error("Failed to fetch property status");
+        }
+
         setLoading(false);
       };
 

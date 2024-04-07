@@ -13,3 +13,13 @@ export const getLandlordLatest = async (
     return error.response;
   }
 };
+
+export const getPropertyStatus = async (landlordId: string) => {
+  try {
+    const response = await axios.get(`/api/properties/landlord/dashbord?landlordId=${landlordId}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

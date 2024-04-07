@@ -22,7 +22,7 @@ export default function ApprovedPropertyDetailsPage({ params }: Readonly<{ param
     useEffect(() => {
         const fetchDetails = async () => {
             try {
-                const res = await getPropertyById(params.slug, "approved")
+                const res = await getPropertyById(params.slug)
                 console.log("lati from details", res.property[0].address.googleMapLocation.latitude)
                 console.log("longi from details", res.property[0].address.googleMapLocation.longitude)
                 setPropertyName(res.property[0].name)
@@ -113,7 +113,7 @@ export default function ApprovedPropertyDetailsPage({ params }: Readonly<{ param
                 <div className='py-2'>
                     <h2 className='font-bold text-xl md:text-2xl md:py-3'>Where You Will Be</h2>
                     <div className='pt-2 pb-10 md:pb-16'>
-                        <GoogleMapView />
+                        <GoogleMapView id={params.slug} />
                     </div>
                 </div>
             </div>

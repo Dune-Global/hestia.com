@@ -30,14 +30,17 @@ export const GET = async (request: NextRequest) => {
 
     if (!propertyStatus) {
       return NextResponse.json(
-        {},
+        { message: "Please provide a valid status" },
         {
           status: HttpStatusCode.BadRequest,
         }
       );
     }
 
-    const property = await Property.find(query).populate({ path: 'landlord', select: '-password -role' });
+    const property = await Property.find(query).populate({
+      path: "landlord",
+      select: "-password -role",
+    });
 
     if (!property) {
       return NextResponse.json(

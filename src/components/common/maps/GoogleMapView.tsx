@@ -15,13 +15,17 @@ interface UserLocation {
     lng: number
 }
 
-export default function GoogleMapView() {
+type Props = {
+    id: string,
+}
+
+export default function GoogleMapView({ id }: Readonly<Props>) {
     const [userLocation, setUserLocation] = useState<UserLocation>()
 
     useEffect(() => {
         const getUserLocation = async () => {
             try {
-                const res = await getPropertyById("661280dc3608e8e6e974ee8f", "approved")
+                const res = await getPropertyById(id)
                 console.log("lati from details", res.property[0].address.googleMapLocation.latitude)
                 console.log("longi from details", res.property[0].address.googleMapLocation.longitude)
                 setUserLocation({
@@ -35,8 +39,6 @@ export default function GoogleMapView() {
         getUserLocation()
 
     }, [])
-
-
 
     return (
         <div className='border-2 border-black rounded-lg'>

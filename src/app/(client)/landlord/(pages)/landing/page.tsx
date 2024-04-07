@@ -5,6 +5,8 @@ import ToptoBottom from "@/components/common/landing/protection/protect";
 import Questions from "@/components/common/landing/questions";
 import Streamline from "@/components/common/landing/streamline";
 import Image from "next/image";
+import SettingsPage from "../settings/page";
+import Settingspage from "../settings/page";
 
 export default function Landing() {
   return (

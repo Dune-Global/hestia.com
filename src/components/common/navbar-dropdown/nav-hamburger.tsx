@@ -68,7 +68,7 @@ export default function NavigationMenuHamburger({
           }`}
         >
           <div
-            className={`py-1 transition-all duration-200 ease-in-out ${
+            className={`py-1 items-start transition-all duration-200 ease-in-out ${
               isOpen ? "opacity-100 delay-100" : "opacity-0 delay-0"
             }`}
             role="menu"

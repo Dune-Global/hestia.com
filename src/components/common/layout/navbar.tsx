@@ -26,26 +26,29 @@ const Navbar = ({ roleType }: NavbarProps) => {
   };
 
   return (
-    <div className="py-">
-      <div>
+    <div className="flex flex-col ">
+      <div className=" ">
         <Container>
           <div className=" ">
             <div className=" pt-">
               <div className="flex flex-row justify-between ">
                 <div className="flex h- py-3 ">
                   <Image
-                    src="/assets/images/footer/Logo.png"
+                    src="/assets/images/footer/Logo.svg"
                     alt="logo"
                     width={120}
                     height={120}
                   />
                 </div>
                 <div className=" flex flex-row items-center ">
-                  {!isMobile && session?.user.role === roleType && <NavDropdown role={roleType}/>}
+                  {!isMobile && session?.user.role === roleType && (
+                    <NavDropdown role={roleType} />
+                  )}
                 </div>
 
                 <div className="flex items-center gap-2 ">
-                  {session?.user.role === roleType && (session?.user.userName || session?.user.firstName)}
+                  {session?.user.role === roleType &&
+                    (session?.user.userName || session?.user.firstName)}
                   <div className="flex">
                     <button onClick={handleClick}>
                       <Avatar>
@@ -56,15 +59,17 @@ const Navbar = ({ roleType }: NavbarProps) => {
                     </button>
 
                     <div
-                      className={`absolute right-0 p-3 mt-20 w-48 rounded-md shadow-lg bg-gray-0 z-50 ring-1 ring-gray-200 bg-white transition-all duration-200 ease-in-out ${
+                      className={`absolute right-0 pt-3 mt-20 w-48 rounded-md shadow-lg  bg-gray-0 z-50 ring-1 ring-gray-200 bg-white transition-all duration-200 ease-in-out ${
                         isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                       }`}
                     >
-                      <NavigationLinks role={roleType}/>
+                      <NavigationLinks  role={roleType} />
                     </div>
                   </div>
                   <div className="flex">
-                    {isMobile && session?.user.role === roleType && <NavigationMenuHamburger role={roleType}/>}
+                    {isMobile && session?.user.role === roleType && (
+                      <NavigationMenuHamburger role={roleType} />
+                    )}
                   </div>
                 </div>
               </div>
@@ -72,7 +77,7 @@ const Navbar = ({ roleType }: NavbarProps) => {
           </div>
         </Container>
       </div>
-      <div className="bg-gray-400 h-[0.5px]"></div>
+      <div className="bg-gray-400 h-[0.5px] flex"></div>
     </div>
   );
 };

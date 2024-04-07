@@ -44,7 +44,7 @@ export default function PendingPropertiesPage() {
     return <Loader />;
   }
   return (
-    <Container>
+    <>
       <PageHeader title="Pending Properties" />
       <div className="pb-16 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-8">
         {properties!.allProperties.length > 0 ? (
@@ -62,17 +62,16 @@ export default function PendingPropertiesPage() {
                 beds={property.basics.bedsPerRoom * property.basics.bedrooms}
                 bathrooms={property.basics.bathrooms}
               />
-              <div className="flex gap-3 mx-4 mb-4">
-                <div>
-                  <Button variant="fillBlack" size="sm">
-                    Edit
-                  </Button>
-                </div>
-                <div>
-                  <Button variant="outline" size="sm">
-                    Delete
-                  </Button>
-                </div>
+            <div className="flex gap-3 mx-4 mb-4">
+              <div>
+                <Button variant="fillBlack" size="sm">
+                  Edit
+                </Button>
+              </div>
+              <div>
+                <Button variant="outlineGray" size="sm">
+                  Delete
+                </Button>
               </div>
             </div>
           ))
@@ -80,6 +79,6 @@ export default function PendingPropertiesPage() {
           <p>No pending property available</p>
         )}
       </div>
-    </Container>
+    </>
   );
 }

@@ -49,9 +49,10 @@ export default function ApprovedPropertiesPage() {
       return <Loader />;
     }
   return (
-    <Container>
+    <>
       <PageHeader title="Approved Properties" />
       <div className="pb-16 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-8">
+
         {properties!.approvedProperties.length > 0 ? (
           properties!.approvedProperties.map((property: any) => (
             <div
@@ -67,17 +68,33 @@ export default function ApprovedPropertiesPage() {
                 beds={property.basics.bedsPerRoom * property.basics.bedrooms}
                 bathrooms={property.basics.bathrooms}
               />
-              <div className="flex gap-3 mx-4 mb-4">
-                <div>
-                  <Button variant="fillBlack" size="sm">
-                    Edit
-                  </Button>
+<div className="flex gap-3 mx-4 mb-4">
+              <div>
+                <Button variant="outlineGray" size="sm">
+                  Delete
+                </Button>
+              </div>
+              <div>
+                <Button variant="outlineGray" size="freeSize">
+                  <div className="flex items-center gap-2">
+                    <div>
+                      <MdPerson size={24} />
+                    </div>
+                    <div>{property.activeTenants}</div>
+                  </div>
+                </Button>
+              </div>
+              <div>
+                <Button variant="outlineGray" size="freeSize">
+                  <div className="flex items-center gap-2">
+                    <div>
+                      <BiSolidMessage size={20} />
+                    </div>
+                    <div>{property.bookingRequests}</div>
+                  </div>
+                </Button>
                 </div>
-                <div>
-                  <Button variant="outline" size="sm">
-                    Delete
-                  </Button>
-                </div>
+
               </div>
             </div>
           ))
@@ -85,6 +102,6 @@ export default function ApprovedPropertiesPage() {
           <p>No approved property available</p>
         )}
       </div>
-    </Container>
+    </>
   );
 }

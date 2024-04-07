@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 
 export default function RemovedPropertiesPage() {
   return (
-    <Container>
-      <PageHeader title="Removed Properties" />
+    <>
+      <PageHeader title="Removed Properties" description="Check below to see which of the properties you have removed"/>
       <div className="pb-16 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-8">
         {Properties.map((property) => (
           <div key={property.id} className="border border-hgray-400 rounded-lg">
@@ -23,7 +23,7 @@ export default function RemovedPropertiesPage() {
             />
             <div className="flex gap-3 mx-4 mb-4">
               <div>
-                <Button variant="outline" size="sm">
+                <Button variant="outlineGray" size="sm">
                   Reapprove
                 </Button>
               </div>
@@ -31,6 +31,6 @@ export default function RemovedPropertiesPage() {
           </div>
         ))}
       </div>
-    </Container>
+    </>
   );
 }

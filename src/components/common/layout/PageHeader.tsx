@@ -25,7 +25,7 @@ export default function PageHeader({
             </div>
             <div className={`gap-5 ${!isSearch ? "hidden" : "flex"}`}>
                 <Input
-                    className="border-hgray-300 md:min-w-64"
+                    className="border-gray-300 md:min-w-64"
                     placeholder="Search properties..."
                     onChange={onChange}
                 />

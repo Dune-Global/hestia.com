@@ -61,7 +61,7 @@ const propertySchema = new mongoose.Schema({
   status: {
     type: String,
     enum: PropertyStatus,
-    default: PropertyStatus.Available,
+    default: PropertyStatus.Pending,
   },
 }, { timestamps: true }); // Add this line
 

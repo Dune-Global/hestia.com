@@ -11,6 +11,8 @@ export enum ShareType {
 }
 
 export enum PropertyStatus {
-  Available = "available",
+  Approved = "approved",
+  Pending = "pending",
+  rejected = "rejected",
   Unavailable = "unavailable",
 }

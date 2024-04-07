@@ -29,8 +29,8 @@ export default function Dashboard() {
   useEffect(() => {
     if (sessionStatus === "loading") return;
 
-    if (!session || session.user.role !== 'landlord') {
-      router.push("/landlord/sign-in");
+    if (!session || session.user.role === 'warden') {
+      router.push("/warden/sign-in");
     } else {
       const fetchData = async () => {
         const response = await getLandlordLatest(session.user.id, "both");

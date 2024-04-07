@@ -143,7 +143,9 @@ const AddProperty = () => {
 
       {/* Map */}
       <div className="mt-16 flex flex-col gap-10">
-        <h3 className={`${questionStyles}`}>Where's your place located?</h3>
+        <h3 className={`${questionStyles}`}>
+          Where&apos;s your place located?
+        </h3>
         <div className="flex gap-6 justify-between items-center">
           <div className='min-w-[50%]'>
             <AddLocationGoogleMap />
@@ -166,8 +168,8 @@ const AddProperty = () => {
           <h3 className={`${questionStyles}`}>
             Share some basics about your place
           </h3>
-          <h4 className="font-medium text-[16px] leading-[20px] text-gray-500">
-            You'll add more details later, like bed types
+          <h4 className="font-medium text-[16px] leading-[20px] text-hgray-500">
+            You&apos;ll add more details later, like bed types
           </h4>
         </div>
         <div className="flex flex-col gap-8">
@@ -258,9 +260,9 @@ const AddProperty = () => {
       {/* Price */}
       <div className="mt-16 flex flex-col gap-10">
         <div className="flex flex-col gap-3">
-          <h3 className={`${questionStyles}`}>Now, set your price</h3>
-          <h4 className="font-medium text-[16px] leading-[20px] text-gray-500">
-            You can change it any time
+          <h3 className={`${questionStyles}`}>Add some photos of your house</h3>
+          <h4 className="font-medium text-[16px] leading-[20px] text-hgray-500">
+            You&apos;ll need 5 to get started.
           </h4>
         </div>
         <PriceInput onPriceChange={handlePriceChange} />

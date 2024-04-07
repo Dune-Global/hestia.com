@@ -32,8 +32,8 @@ const AdminSignInCard = (props: Props) => {
   const form = useForm<z.infer<typeof signInSchemaAdmin>>({
     resolver: zodResolver(signInSchemaAdmin),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "admin@email.com",
+      password: "Admin@1234",
       rememberMe: false,
     },
   });

@@ -10,7 +10,6 @@ axios.defaults.baseURL = BASE_URL;
 export const getPropertyById = async (propertyId: string) => {
   try {
     const response = await axios.get(`/property-details?id=${propertyId}`);
-    console.log("\nProperty details by ID: ", response.data);
 
     return response.data;
   } catch (error) {

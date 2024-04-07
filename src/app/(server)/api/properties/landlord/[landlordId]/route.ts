@@ -10,9 +10,9 @@ export const GET = async (request: NextRequest) => {
   const pathParts = request.nextUrl.pathname.split("/");
   if (pathParts.length < 3) {
     return NextResponse.json(
-      { message: "Landlord ID not provided" },
+      {},
       {
-        status: 400,
+        status: HttpStatusCode.BadRequest,
       }
     );
   }
@@ -20,9 +20,9 @@ export const GET = async (request: NextRequest) => {
   const landlordId = pathParts.pop();
   if (!landlordId) {
     return NextResponse.json(
-      { message: "Landlord ID not provided" },
+      {},
       {
-        status: 400,
+        status: HttpStatusCode.BadRequest,
       }
     );
   }
@@ -34,19 +34,21 @@ export const GET = async (request: NextRequest) => {
 
     if (!mongoose.Types.ObjectId.isValid(landlordId)) {
       return NextResponse.json(
-        { message: "Invalid landlord ID" },
+        {},
         {
-          status: 400,
+          status: HttpStatusCode.BadRequest,
         }
       );
     }
 
-    const landlord = await LandLordModel.findById(landlordId);
+    const landlord = await LandLordModel.findById(landlordId).select(
+      "-role -password"
+    );
     if (!landlord) {
       return NextResponse.json(
-        { message: "Landlord not found" },
+        {},
         {
-          status: 404,
+          status: HttpStatusCode.NotFound,
         }
       );
     }
@@ -79,7 +81,7 @@ export const GET = async (request: NextRequest) => {
     }
 
     return NextResponse.json(
-      { approvedProperties, allProperties },
+      { landlord, approvedProperties, allProperties },
       {
         status: HttpStatusCode.Ok,
       }
@@ -88,7 +90,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json(
       { message: err.message },
       {
-        status: 500,
+        status: HttpStatusCode.InternalServerError,
       }
     );
   }

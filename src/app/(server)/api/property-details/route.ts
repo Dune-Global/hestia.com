@@ -28,12 +28,7 @@ export const GET = async (request: NextRequest) => {
     }
 
     if (!propertyStatus) {
-      return NextResponse.json(
-        { message: "Property status is required" },
-        {
-          status: HttpStatusCode.BadRequest,
-        }
-      );
+      query._id = id;
     }
 
     const property = await Property.find(query);

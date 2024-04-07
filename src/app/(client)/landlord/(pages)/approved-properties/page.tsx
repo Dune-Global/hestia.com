@@ -46,6 +46,11 @@ export default function ApprovedPropertiesPage() {
   if (loading) {
     return <Loader />;
   }
+
+  const handleCardPress = (id: string) => {
+    router.push(`/landlord/approved-properties/${id}`);
+  };
+
   return (
     <>
       <PageHeader title="Approved Properties" />
@@ -56,15 +61,17 @@ export default function ApprovedPropertiesPage() {
               key={property.id}
               className="border border-hgray-400 rounded-lg"
             >
-              <PropertyCard
-                id={property._id}
-                image={property.images[0]}
-                name={property.name}
-                location={`${property.address.line1}, ${property.address.city}`}
-                bedrooms={property.basics.bedrooms}
-                beds={property.basics.bedsPerRoom * property.basics.bedrooms}
-                bathrooms={property.basics.bathrooms}
-              />
+              <button onClick={() => { handleCardPress(property._id) }}>
+                <PropertyCard
+                  id={property._id}
+                  image={property.images[0]}
+                  name={property.name}
+                  location={`${property.address.line1}, ${property.address.city}`}
+                  bedrooms={property.basics.bedrooms}
+                  beds={property.basics.bedsPerRoom * property.basics.bedrooms}
+                  bathrooms={property.basics.bathrooms}
+                />
+              </button>
               <div className="flex gap-3 mx-4 mb-4">
                 <div>
                   <Button variant="outlineGray" size="sm">

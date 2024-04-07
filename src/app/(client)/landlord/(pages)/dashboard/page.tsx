@@ -25,7 +25,7 @@ export default function Dashboard() {
   const router = useRouter();
 
   const { data: session, status: sessionStatus }: any = useSession();
-  
+
   useEffect(() => {
     if (sessionStatus === "loading") return;
 
@@ -53,7 +53,7 @@ export default function Dashboard() {
         isSearch
         description="Welcome landlord! Check below to see an overview"
       />
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 mb-5 md:mb-24">
         <div className="border-2 border-gray-300 py-10 px-5 flex flex-wrap justify-evenly gap-5 rounded-lg">
           {totals.map((item) => (
             <FeatureCard
@@ -74,9 +74,8 @@ export default function Dashboard() {
                 <DashboardPropertyCard
                   imageSrc={properties!.approvedProperties[0].images[0]}
                   title={properties!.approvedProperties[0].name}
-                  location={`${
-                    properties!.approvedProperties[0].address.line1
-                  } ${properties!.approvedProperties[0].address.city}`}
+                  location={`${properties!.approvedProperties[0].address.line1
+                    } ${properties!.approvedProperties[0].address.city}`}
                   bedrooms={properties!.approvedProperties[0].basics.bedrooms}
                   beds={
                     properties!.approvedProperties[0].basics.bedsPerRoom *
@@ -97,9 +96,8 @@ export default function Dashboard() {
                 <DashboardPropertyCard
                   imageSrc={properties!.allProperties[0].images[0]}
                   title={properties!.allProperties[0].name}
-                  location={`${properties!.allProperties[0].address.line1} ${
-                    properties!.allProperties[0].address.city
-                  }`}
+                  location={`${properties!.allProperties[0].address.line1} ${properties!.allProperties[0].address.city
+                    }`}
                   bedrooms={properties!.allProperties[0].basics.bedrooms}
                   beds={
                     properties!.allProperties[0].basics.bedsPerRoom *
@@ -124,9 +122,6 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
-        </div>
-        <div className="pb-10">
-          <div className="border-2 border-gray-300 rounded-lg w-full h-96"></div>
         </div>
       </div>
     </>

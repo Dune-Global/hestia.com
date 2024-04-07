@@ -9,7 +9,7 @@ import LandlordBookingRequestCard from '@/components/landLord/LandlordBookingReq
 import { getPropertyById } from '@/helpers/api/landlord/getPropertyById'
 import GoogleMapView from '@/components/common/maps/GoogleMapView'
 
-export default function ApprovedPropertyDetailsPage({ params }: Readonly<{ params: { slug: string } }>) {
+export default function PendingPropertyDetailsPage({ params }: Readonly<{ params: { slug: string } }>) {
     const [propertyName, setPropertyName] = useState<string>()
     const [propertyDescription, setPropertyDescription] = useState<string>();
     const [imageUrls, setImageUrls] = useState<string[]>([])

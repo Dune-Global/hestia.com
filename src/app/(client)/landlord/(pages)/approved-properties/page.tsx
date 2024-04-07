@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { Properties } from "@/data/properties";
@@ -20,39 +20,36 @@ interface PropertiesResponse {
 }
 
 export default function ApprovedPropertiesPage() {
-    const [properties, setProperties] = useState<PropertiesResponse | null>(
-      null
-    );
-    const [loading, setLoading] = useState<boolean>(true);
-    const router = useRouter();
+  const [properties, setProperties] = useState<PropertiesResponse | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
-    const { data: session, status: sessionStatus }: any = useSession();
+  const { data: session, status: sessionStatus }: any = useSession();
 
-    useEffect(() => {
-      if (sessionStatus === "loading") return;
+  useEffect(() => {
+    if (sessionStatus === "loading") return;
 
-      if (!session || session.user.role !== "landlord") {
-        router.push("/landlord/sign-in");
-      } else {
-        const fetchData = async () => {
-          const response = await getLandlordLatest(session.user.id, "approve");
-          setProperties(response.data as PropertiesResponse);
-          console.log(response.data);
-          setLoading(false);
-        };
+    if (!session || session.user.role !== "landlord") {
+      router.push("/landlord/sign-in");
+    } else {
+      const fetchData = async () => {
+        const response = await getLandlordLatest(session.user.id, "approve");
+        setProperties(response.data as PropertiesResponse);
+        console.log(response.data);
+        setLoading(false);
+      };
 
-        fetchData();
-      }
-    }, [session, sessionStatus, router]);
-
-    if (loading) {
-      return <Loader />;
+      fetchData();
     }
+  }, [session, sessionStatus, router]);
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
       <PageHeader title="Approved Properties" />
       <div className="pb-16 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-8">
-
         {properties!.approvedProperties.length > 0 ? (
           properties!.approvedProperties.map((property: any) => (
             <div
@@ -68,33 +65,32 @@ export default function ApprovedPropertiesPage() {
                 beds={property.basics.bedsPerRoom * property.basics.bedrooms}
                 bathrooms={property.basics.bathrooms}
               />
-<div className="flex gap-3 mx-4 mb-4">
-              <div>
-                <Button variant="outlineGray" size="sm">
-                  Delete
-                </Button>
-              </div>
-              <div>
-                <Button variant="outlineGray" size="freeSize">
-                  <div className="flex items-center gap-2">
-                    <div>
-                      <MdPerson size={24} />
-                    </div>
-                    <div>{property.activeTenants}</div>
-                  </div>
-                </Button>
-              </div>
-              <div>
-                <Button variant="outlineGray" size="freeSize">
-                  <div className="flex items-center gap-2">
-                    <div>
-                      <BiSolidMessage size={20} />
-                    </div>
-                    <div>{property.bookingRequests}</div>
-                  </div>
-                </Button>
+              <div className="flex gap-3 mx-4 mb-4">
+                <div>
+                  <Button variant="outlineGray" size="sm">
+                    Delete
+                  </Button>
                 </div>
-
+                <div>
+                  <Button variant="outlineGray" size="freeSize">
+                    <div className="flex items-center gap-2">
+                      <div>
+                        <MdPerson size={24} />
+                      </div>
+                      <div>{property.activeTenants}</div>
+                    </div>
+                  </Button>
+                </div>
+                <div>
+                  <Button variant="outlineGray" size="freeSize">
+                    <div className="flex items-center gap-2">
+                      <div>
+                        <BiSolidMessage size={20} />
+                      </div>
+                      <div>{property.bookingRequests}</div>
+                    </div>
+                  </Button>
+                </div>
               </div>
             </div>
           ))

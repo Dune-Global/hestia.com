@@ -28,7 +28,7 @@ export default function PendingPropertiesPage() {
                 </Button>
               </div>
               <div>
-                <Button variant="outline" size="sm">
+                <Button variant="outlineGray" size="sm">
                   Delete
                 </Button>
               </div>

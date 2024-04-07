@@ -190,7 +190,7 @@ export const WardenRegisterForm = (props: Props) => {
           />
           <div className="lg:col-span-2 flex justify-center gap-8 my-12">
             <Button
-              variant={"outline"}
+              variant={"outlineGray"}
               type="button"
               onClick={() => form.reset()}
             >

@@ -150,7 +150,7 @@ export const StudentRegisterForm = (props: Props) => {
                 <FormControl>
                   <Input
                     type="email"
-                    placeholder="Enter university Email"
+                    placeholder="Enter university email"
                     {...field}
                   />
                 </FormControl>

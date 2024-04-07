@@ -4,7 +4,7 @@ import { adminDashboard } from "@/data/admin/dashboard/dashboard";
 import ArticlesSection from "@/components/admin/articles/articles";
 import { Button } from "@/components/ui/button";
 
-export default function ApprovedPropertiesPage() {
+export default function DashboardPage() {
   return (
     <>
       <PageHeader

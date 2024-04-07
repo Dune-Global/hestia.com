@@ -16,6 +16,7 @@ import PriceInput from "@/components/landLord/PriceInput";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/common/layout/loader";
+import AddLocationGoogleMap from "@/components/common/maps/AddLocationGoogleMap";
 
 const AddProperty = () => {
   const router = useRouter();
@@ -144,8 +145,8 @@ const AddProperty = () => {
       <div className="mt-16 flex flex-col gap-10">
         <h3 className={`${questionStyles}`}>Where's your place located?</h3>
         <div className="flex gap-6 justify-between items-center">
-          <div className="rounded-xl w-[50%] min-w-[50%] min-h-[700px] bg-gray-400">
-            {/* Insert map here */}
+          <div className='min-w-[50%]'>
+            <AddLocationGoogleMap />
           </div>
           <div className="w-full flex flex-col gap-12">
             <TextInput placeholder="Address line 1" />
@@ -195,7 +196,7 @@ const AddProperty = () => {
               svg={card.svg}
               onSelect={() => handleAmenitiesSelect(card.id)}
               selected={selectedAmenities === card.id}
-              // clickable={card.clickable}
+            // clickable={card.clickable}
             />
           ))}
         </div>
@@ -214,7 +215,7 @@ const AddProperty = () => {
                 svg={card.svg}
                 onSelect={() => handleSafetyAmenitiesSelect(card.id)}
                 selected={selectedSafetyAmenities === card.id}
-                // clickable={card.clickable}
+              // clickable={card.clickable}
               />
             ))}
           </div>

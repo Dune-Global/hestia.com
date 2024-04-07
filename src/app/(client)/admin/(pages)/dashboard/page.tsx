@@ -1,10 +1,14 @@
+"use client";
+
 import React from "react";
 import PageHeader from "@/components/common/layout/PageHeader";
 import { adminDashboard } from "@/data/admin/dashboard/dashboard";
 import ArticlesSection from "@/components/admin/articles/articles";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function ApprovedPropertiesPage() {
+  const router = useRouter();
   return (
     <>
       <PageHeader
@@ -26,9 +30,15 @@ export default function ApprovedPropertiesPage() {
         <div className="flex flex-col items-center px-8 bg-white border border-gray-400 rounded-lg">
           <div>
             <div className="text-2xl font-bold text-left pt-8">Articles</div>
-            <ArticlesSection />
+            <ArticlesSection numArticles={5} />
           </div>
-          <Button variant="outlineGray" className="mb-16">
+          <Button
+            variant="outlineGray"
+            className="mb-16"
+            onClick={() => {
+              router.push("/admin/all-articles");
+            }}
+          >
             View all
           </Button>
         </div>

@@ -1,12 +1,16 @@
 export enum PropertyType {
   House = "house",
   Apartment = "apartment",
-  Hostel = "hostel"
+  Hostel = "hostel",
 }
 
 export enum ShareType {
   Entire = "entire",
   Private = "private",
-  Shared = "shared"
+  Shared = "shared",
 }
 
+export enum PropertyStatus {
+  Available = "available",
+  Unavailable = "unavailable",
+}

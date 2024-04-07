@@ -1,4 +1,4 @@
-import { PropertyType, ShareType } from "./../enum/Property";
+import { PropertyType, ShareType,PropertyStatus } from "./../enum/Property";
 import { Gender } from "./../enum/Gender";
 
 interface GoogleMapLocation {
@@ -47,4 +47,7 @@ interface Property {
   images: string[];
   genders: Gender;
   basics: Basics;
+  status: PropertyStatus;
+  createdAt: Date; 
+  updatedAt: Date; 
 }

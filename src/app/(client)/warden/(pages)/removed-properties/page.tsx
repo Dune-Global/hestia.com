@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export default function RemovedPropertiesPage() {
   return (
-    <Container>
+    <>
       <PageHeader title="Removed Properties" description="Check below to see which of the properties you have removed"/>
       <div className="pb-16 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-8">
         {Properties.map((property) => (
@@ -31,6 +31,6 @@ export default function RemovedPropertiesPage() {
           </div>
         ))}
       </div>
-    </Container>
+    </>
   );
 }

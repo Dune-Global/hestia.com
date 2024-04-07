@@ -10,11 +10,18 @@ import CounterInput from "@/components/common/inputs/CounterInput";
 import basicsCounterData from "@/data/landlord/basics";
 import genderTypeData from "@/data/landlord/genderType";
 import { amenitiesData, safetyAmenitiesData } from "@/data/landlord/amenities";
-import { Images } from "lucide-react";
 import ImageUpload from "@/components/landLord/ImageUpload";
 import Container from "@/components/common/Container";
+import PriceInput from "@/components/landLord/PriceInput";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Loader from "@/components/common/layout/loader";
 
 const AddProperty = () => {
+  const router = useRouter();
+
+  const { data: session, status: sessionStatus }: any = useSession();
+
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [selectedShareType, setSelectedShareType] = useState<string | null>(
     null
@@ -29,6 +36,7 @@ const AddProperty = () => {
   const [selectedSafetyAmenities, setSelectedSafetyAmenities] = useState<
     string | null
   >(null);
+  const [propertyPrice, setPropertyPrice] = useState<number>(0);
 
   const handleImagesSelected = (images: File[]) => {
     setSelectedImages(images);
@@ -56,6 +64,10 @@ const AddProperty = () => {
 
   const handleSafetyAmenitiesSelect = (id: string) => {
     setSelectedSafetyAmenities(id === selectedSafetyAmenities ? null : id);
+  };
+
+  const handlePriceChange = (price: number) => {
+    setPropertyPrice(price);
   };
 
   const questionStyles = "font-bold text-[24px] leading-[32px]";
@@ -132,7 +144,9 @@ const AddProperty = () => {
       <div className="mt-16 flex flex-col gap-10">
         <h3 className={`${questionStyles}`}>Where's your place located?</h3>
         <div className="flex gap-6 justify-between items-center">
-          <div className="rounded-xl w-[50%] min-w-[50%] min-h-[700px] bg-gray-400"></div>
+          <div className="rounded-xl w-[50%] min-w-[50%] min-h-[700px] bg-gray-400">
+            {/* Insert map here */}
+          </div>
           <div className="w-full flex flex-col gap-12">
             <TextInput placeholder="Address line 1" />
             <TextInput placeholder="Address line 2" />
@@ -208,30 +222,6 @@ const AddProperty = () => {
       </div>
 
       {/* Image */}
-      {/* <div className="mt-16 flex flex-col gap-10">
-        <div className="flex flex-col gap-3">
-          <h3 className={`${questionStyles}`}>Add some photos of your house</h3>
-          <h4 className="font-medium text-[16px] leading-[20px] text-gray-500">
-            You'll need 5 to get started.
-          </h4>
-        </div>
-        <div className="border border-gray-400 h-[456px] max-h-[456px] rounded-xl flex flex-col justify-center items-center gap-16">
-          <div className="flex flex-col items-center gap-8">
-            <Images size={64} strokeWidth={1} color="gray" />
-            <div className="flex flex-col items-center gap-3">
-              <h3 className="font-bold text-[20px] leading-[28px]">
-                Drag your photos here
-              </h3>
-              <h3 className="font-medium text-[16px] leading-[20px] text-gray-400">
-                Choose atleast 3 photos
-              </h3>
-            </div>
-          </div>
-          <h3 className="font-medium text-[16px] underline leading-[20px]">
-            Upload from your device
-          </h3>
-        </div>
-      </div> */}
       <div className="mt-16 flex flex-col gap-10">
         <div className="flex flex-col gap-3">
           <h3 className={`${questionStyles}`}>Add some photos of your house</h3>
@@ -264,6 +254,7 @@ const AddProperty = () => {
         <TextInput placeholder="Description" />
       </div>
 
+      {/* Price */}
       <div className="mt-16 flex flex-col gap-10">
         <div className="flex flex-col gap-3">
           <h3 className={`${questionStyles}`}>Now, set your price</h3>
@@ -271,7 +262,17 @@ const AddProperty = () => {
             You can change it any time
           </h4>
         </div>
-        <TextInput placeholder="Description" />
+        <PriceInput onPriceChange={handlePriceChange} />
+      </div>
+
+      {/* Submit */}
+      <div className="mt-16 gap-6 flex mb-20 items-center justify-center">
+        <button className=" text-gray-900 py-4 px-8 rounded-lg border border-gray-900">
+          Clear All
+        </button>
+        <button className="bg-[#262626] text-white py-4 px-8 rounded-lg">
+          Publish
+        </button>
       </div>
     </Container>
   );

@@ -3,6 +3,7 @@ import { HttpStatusCode } from "axios";
 import mongoose from "mongoose";
 import { monogoConnect } from "@/app/(server)/config/db";
 import Property from "@/app/(server)/models/property";
+import LandLordModel from "../../models/landLord";
 
 export const GET = async (request: NextRequest) => {
   const id = request.nextUrl.searchParams.get("id");
@@ -10,7 +11,7 @@ export const GET = async (request: NextRequest) => {
 
   if (!mongoose.Types.ObjectId.isValid(id!)) {
     return NextResponse.json(
-      { message: "Invalid id" },
+      {},
       {
         status: HttpStatusCode.BadRequest,
       }
@@ -31,11 +32,11 @@ export const GET = async (request: NextRequest) => {
       query._id = id;
     }
 
-    const property = await Property.find(query);
+    const property = await Property.find(query).populate({ path: 'landlord', select: '-password -role' });
 
     if (!property) {
       return NextResponse.json(
-        { message: "Property not found" },
+        {},
         {
           status: HttpStatusCode.NotFound,
         }
@@ -44,7 +45,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ property }, { status: HttpStatusCode.Ok });
   } catch (err: any) {
     return NextResponse.json(
-      { message: err.message },
+      {},
       {
         status: HttpStatusCode.InternalServerError,
       }

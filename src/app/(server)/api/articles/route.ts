@@ -35,7 +35,7 @@ export const GET = async () => {
     const articles = await Article.find().sort({ createdAt: -1 });
 
     return NextResponse.json(
-      { message: "Articles fetched successfully", articles },
+      { articles },
       {
         status: HttpStatusCode.Ok,
       }

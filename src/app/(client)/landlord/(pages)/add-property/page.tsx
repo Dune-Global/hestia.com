@@ -71,7 +71,9 @@ const AddProperty = () => {
 
       {/* Map */}
       <div className="mt-16 flex flex-col gap-10">
-        <h3 className={`${questionStyles}`}>Where's your place located?</h3>
+        <h3 className={`${questionStyles}`}>
+          Where&apos;s your place located?
+        </h3>
         <div className="flex gap-6 justify-between items-center">
           <div className="rounded-xl w-[50%] min-w-[50%] min-h-[700px] bg-hgray-400"></div>
           <div className="w-full flex flex-col gap-12">
@@ -93,7 +95,7 @@ const AddProperty = () => {
             Share some basics about your place
           </h3>
           <h4 className="font-medium text-[16px] leading-[20px] text-hgray-500">
-            You'll add more details later, like bed types
+            You&apos;ll add more details later, like bed types
           </h4>
         </div>
         <div className="flex flex-col gap-8">
@@ -173,7 +175,7 @@ const AddProperty = () => {
         <div className="flex flex-col gap-3">
           <h3 className={`${questionStyles}`}>Add some photos of your house</h3>
           <h4 className="font-medium text-[16px] leading-[20px] text-hgray-500">
-            You'll need 5 to get started.
+            You&apos;ll need 5 to get started.
           </h4>
         </div>
         <ImageUpload onImagesSelected={handleImagesSelected} />

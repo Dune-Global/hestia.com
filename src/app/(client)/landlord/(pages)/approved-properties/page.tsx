@@ -35,7 +35,6 @@ export default function ApprovedPropertiesPage() {
       const fetchData = async () => {
         const response = await getLandlordLatest(session.user.id, "approve");
         setProperties(response.data as PropertiesResponse);
-        console.log(response.data);
         setLoading(false);
       };
 

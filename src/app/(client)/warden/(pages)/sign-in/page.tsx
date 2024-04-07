@@ -15,7 +15,7 @@ export default function SignIn() {
       sessionStatus === "authenticated" &&
       session?.user?.role === UserRoles.WARDEN
     ) {
-      redirect("./dashboard");
+      redirect("./map");
     }
   }, [session, sessionStatus]);
 

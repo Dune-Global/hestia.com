@@ -4,6 +4,7 @@ import { HttpStatusCode } from "axios";
 import StudentModel from "@/app/(server)/models/student";
 import LandLordModel from "@/app/(server)/models/landLord";
 import WardenModel from "@/app/(server)/models/warden";
+import Property from "@/app/(server)/models/property";
 
 export const GET = async (request: NextRequest) => {
   try {
@@ -12,6 +13,7 @@ export const GET = async (request: NextRequest) => {
     const studentCount = await StudentModel.countDocuments();
     const landlordCount = await LandLordModel.countDocuments();
     const wardenCount = await WardenModel.countDocuments();
+    const propertyCount = await Property.countDocuments();
 
     return NextResponse.json(
       {
@@ -19,6 +21,7 @@ export const GET = async (request: NextRequest) => {
           students: studentCount,
           landlords: landlordCount,
           wardens: wardenCount,
+          properties: propertyCount,
         },
       },
       {

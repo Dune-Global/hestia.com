@@ -1,14 +1,42 @@
 "use client";
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageHeader from "@/components/common/layout/PageHeader";
-import { adminDashboard } from "@/data/admin/dashboard/dashboard";
 import ArticlesSection from "@/components/admin/articles/articles";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { getDashboardData } from "@/helpers/api/admin/dashboard/dashboard";
+
+type DashboardItem = {
+  id: number;
+  title: string;
+  count: number;
+};
 
 export default function ApprovedPropertiesPage() {
   const router = useRouter();
+  const [adminDashboard, setAdminDashboard] = useState<DashboardItem[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getDashboardData();
+      if (response && response.data) {
+        setAdminDashboard([
+          { id: 1, title: "Students", count: response.data.students },
+          { id: 2, title: "Landlords", count: response.data.landlords },
+          { id: 3, title: "Wardens", count: response.data.wardens },
+          { id: 4, title: "Properties", count: response.data.properties },
+          {
+            id: 5,
+            title: "Active tenants",
+            count: response.data.active_tenants,
+          },
+        ]);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <PageHeader

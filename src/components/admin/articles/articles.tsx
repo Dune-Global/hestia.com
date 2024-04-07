@@ -19,7 +19,6 @@ export default function ArticlesSection({ numArticles }: ArticlesSectionProps) {
         const response = await getAllArticles();
         if (response.data.articles && response.data.articles.length > 0) {
           setArticles(response.data.articles as IArticle[]);
-          console.log(response.data.articles);
         } else {
           console.log("No articles found");
         }

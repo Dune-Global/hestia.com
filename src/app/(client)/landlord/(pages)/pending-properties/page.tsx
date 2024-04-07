@@ -1,40 +1,84 @@
-import React from "react";
-import { Properties } from "@/data/properties";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import PropertyCard from "@/components/common/cards/PropertyCard";
 import PageHeader from "@/components/common/layout/PageHeader";
 import Container from "@/components/common/Container";
 import { Button } from "@/components/ui/button";
+import { Property } from "@/types/property";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { getLandlordLatest } from "@/helpers/api/landlord/dashbord";
+import Loader from "@/components/common/layout/loader";
+
+interface PropertiesResponse {
+  allProperties: Property[];
+  approvedProperties: Property[];
+}
 
 export default function PendingPropertiesPage() {
+  const [properties, setProperties] = useState<PropertiesResponse | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
+
+  const { data: session, status: sessionStatus }: any = useSession();
+
+  useEffect(() => {
+    if (sessionStatus === "loading") return;
+
+    if (!session || session.user.role !== "landlord") {
+      router.push("/landlord/sign-in");
+    } else {
+      const fetchData = async () => {
+        const response = await getLandlordLatest(session.user.id, "pending");
+        setProperties(response.data as PropertiesResponse);
+        console.log(response.data);
+        setLoading(false);
+      };
+
+      fetchData();
+    }
+  }, [session, sessionStatus, router]);
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <Container>
       <PageHeader title="Pending Properties" />
       <div className="pb-16 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-8">
-        {Properties.map((property) => (
-          <div key={property.id} className="border border-hgray-400 rounded-lg">
-            <PropertyCard
-              id={property.id}
-              image={property.image}
-              name={property.name}
-              location={property.location}
-              bedrooms={property.bedrooms}
-              beds={property.beds}
-              bathrooms={property.bathrooms}
-            />
-            <div className="flex gap-3 mx-4 mb-4">
-              <div>
-                <Button variant="fillBlack" size="sm">
-                  Edit
-                </Button>
-              </div>
-              <div>
-                <Button variant="outline" size="sm">
-                  Delete
-                </Button>
+        {properties!.allProperties.length > 0 ? (
+          properties!.allProperties.map((property: any) => (
+            <div
+              key={property.id}
+              className="border border-hgray-400 rounded-lg"
+            >
+              <PropertyCard
+                id={property._id}
+                image={property.images[0]}
+                name={property.name}
+                location={`${property.address.line1}, ${property.address.city}`}
+                bedrooms={property.basics.bedrooms}
+                beds={property.basics.bedsPerRoom * property.basics.bedrooms}
+                bathrooms={property.basics.bathrooms}
+              />
+              <div className="flex gap-3 mx-4 mb-4">
+                <div>
+                  <Button variant="fillBlack" size="sm">
+                    Edit
+                  </Button>
+                </div>
+                <div>
+                  <Button variant="outline" size="sm">
+                    Delete
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No pending property available</p>
+        )}
       </div>
     </Container>
   );

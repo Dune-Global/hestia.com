@@ -50,4 +50,5 @@ interface Property {
   status: PropertyStatus;
   createdAt: Date; 
   updatedAt: Date; 
+  approvedDate?: Date;
 }

@@ -28,11 +28,11 @@ export const GET = async (request: NextRequest) => {
       query.status = propertyStatus;
     }
 
-    if (!propertyStatus) {
+if (!property) {
       return NextResponse.json(
-        { message: "Please provide a valid status" },
+        {},
         {
-          status: HttpStatusCode.BadRequest,
+          status: HttpStatusCode.NotFound,
         }
       );
     }

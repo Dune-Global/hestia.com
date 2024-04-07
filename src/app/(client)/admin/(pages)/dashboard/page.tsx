@@ -12,7 +12,8 @@ type DashboardItem = {
   count: number;
 };
 
-export default function ApprovedPropertiesPage() {
+
+export default function DashboardPage() {
   const router = useRouter();
   const [adminDashboard, setAdminDashboard] = useState<DashboardItem[]>([]);
 
@@ -36,7 +37,6 @@ export default function ApprovedPropertiesPage() {
 
     fetchData();
   }, []);
-
   return (
     <>
       <PageHeader

@@ -1,19 +1,19 @@
 const pages = [
   {
     title: "Dashboard",
-    path: "/landlord/dashboard",
+    path: "/warden/dashboard",
   },
   {
-    title: "Add Property",
-    path: "/landlord/add-property",
-  },
-  {
-    title: "Pending",
-    path: "/landlord/pending-properties",
+    title: "Map",
+    path: "/warden/map",
   },
   {
     title: "Approved",
-    path: "/landlord/approved-properties",
+    path: "/warden/approved-properties",
+  },
+  {
+    title: "Removed",
+    path: "/warden/removed-properties",
   },
 ];
 

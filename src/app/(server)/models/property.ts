@@ -38,32 +38,36 @@ const basicsSchema = new mongoose.Schema({
   bathrooms: Number,
 });
 
-const propertySchema = new mongoose.Schema({
-  landlord: { type: mongoose.Schema.Types.ObjectId, ref: LandLordModel },
-  name: String,
-  description: String,
-  address: addressSchema,
-  propertyType: {
-    type: String,
-    enum: PropertyType,
+const propertySchema = new mongoose.Schema(
+  {
+    landlord: { type: mongoose.Schema.Types.ObjectId, ref: LandLordModel },
+    name: String,
+    description: String,
+    address: addressSchema,
+    propertyType: {
+      type: String,
+      enum: PropertyType,
+    },
+    shareType: {
+      type: String,
+      enum: ShareType,
+    },
+    amenities: amenitiesSchema,
+    images: [String],
+    genders: {
+      type: String,
+      enum: Gender,
+    },
+    basics: basicsSchema,
+    status: {
+      type: String,
+      enum: PropertyStatus,
+      default: PropertyStatus.Pending,
+    },
+    approvedDate: Date,
   },
-  shareType: {
-    type: String,
-    enum: ShareType,
-  },
-  amenities: amenitiesSchema,
-  images: [String],
-  genders: {
-    type: String,
-    enum: Gender,
-  },
-  basics: basicsSchema,
-  status: {
-    type: String,
-    enum: PropertyStatus,
-    default: PropertyStatus.Pending,
-  },
-}, { timestamps: true }); // Add this line
+  { timestamps: true }
+);
 
 const Property =
   mongoose.models.Property || mongoose.model("Property", propertySchema);

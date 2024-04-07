@@ -14,7 +14,7 @@ export default function WardenLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="min-h-screen relative">
       <Navbar roleType={UserRoles.WARDEN} />
       <Container>{children}</Container>
     </div>

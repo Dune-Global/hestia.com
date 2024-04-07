@@ -28,11 +28,19 @@ export const GET = async (request: NextRequest) => {
       query.status = propertyStatus;
     }
 
-    if (!propertyStatus) {
-      query._id = id;
+if (!property) {
+      return NextResponse.json(
+        {},
+        {
+          status: HttpStatusCode.NotFound,
+        }
+      );
     }
 
-    const property = await Property.find(query).populate({ path: 'landlord', select: '-password -role' });
+    const property = await Property.find(query).populate({
+      path: "landlord",
+      select: "-password -role",
+    });
 
     if (!property) {
       return NextResponse.json(

@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import PropertyCard from "@/components/common/cards/PropertyCard";
 import PageHeader from "@/components/common/layout/PageHeader";
-import Container from "@/components/common/Container";
 import { Button } from "@/components/ui/button";
 import { Property } from "@/types/property";
 import { useRouter } from "next/navigation";
@@ -62,16 +61,17 @@ export default function PendingPropertiesPage() {
                 beds={property.basics.bedsPerRoom * property.basics.bedrooms}
                 bathrooms={property.basics.bathrooms}
               />
-            <div className="flex gap-3 mx-4 mb-4">
-              <div>
-                <Button variant="fillBlack" size="sm">
-                  Edit
-                </Button>
-              </div>
-              <div>
-                <Button variant="outlineGray" size="sm">
-                  Delete
-                </Button>
+              <div className="flex gap-3 mx-4 mb-4">
+                <div>
+                  <Button variant="fillBlack" size="sm">
+                    Edit
+                  </Button>
+                </div>
+                <div>
+                  <Button variant="outlineGray" size="sm">
+                    Delete
+                  </Button>
+                </div>
               </div>
             </div>
           ))

@@ -29,7 +29,7 @@ export default function Streamline() {
       <div className="flex gap-2 flex-col justify-center md:px-36 ">
         <div className="flex justify-center ">
           <Image
-            src={"/assets/images/footer/Logo.png"}
+            src={"/assets/images/footer/Logo.svg"}
             alt=""
             width={150}
             height={150}
@@ -61,14 +61,14 @@ export default function Streamline() {
               {Streamline_list5}
             </div>
           </div>
-          <div className="flex gap-16 justify-center">
+          <div className="flex gap-6 justify-center">
             <div>
               <Button
                 variant={"fillBlack"}
                 className="bg-gray-900"
                 onClick={handleSignUpClick}
               >
-                Sign Up
+                Sign in as a Student 
               </Button>
             </div>
             <div>
@@ -77,7 +77,7 @@ export default function Streamline() {
                 className=""
                 onClick={handleSignInClick}
               >
-                Sign In
+                Sign in as a Landlord
               </Button>
             </div>
           </div>

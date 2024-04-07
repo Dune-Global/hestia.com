@@ -25,12 +25,12 @@ export default function ApprovedPropertiesPage() {
             />
             <div className="flex gap-3 mx-4 mb-4">
               <div>
-                <Button variant="outline" size="sm">
+                <Button variant="outlineGray" size="sm">
                   Delete
                 </Button>
               </div>
               <div>
-                <Button variant="outline" size="freeSize">
+                <Button variant="outlineGray" size="freeSize">
                   <div className="flex items-center gap-2">
                     <div>
                       <MdPerson size={24} />
@@ -40,7 +40,7 @@ export default function ApprovedPropertiesPage() {
                 </Button>
               </div>
               <div>
-                <Button variant="outline" size="freeSize">
+                <Button variant="outlineGray" size="freeSize">
                   <div className="flex items-center gap-2">
                     <div>
                       <BiSolidMessage size={20} />

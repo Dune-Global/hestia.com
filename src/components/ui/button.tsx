@@ -12,8 +12,12 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         fillBlack: "bg-gray-800 text-white hover:bg-gray-800/80",
-        outline:
+        outlineGray:
           "border border-gray-800 text-gray-800 bg-white hover:bg-accent hover:text-accent-foreground",
+        outlineGreen:
+          "border border-green-500 text-green-500 bg-white hover:opacity-80",
+        outlineRed:
+          "border border-red-500 text-red-500 bg-white hover:opacity-80",
       },
       isDisabled: {
         true: "opacity-50 pointer-events-none",

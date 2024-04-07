@@ -23,7 +23,7 @@ export default function RemovedPropertiesPage() {
             />
             <div className="flex gap-3 mx-4 mb-4">
               <div>
-                <Button variant="outline" size="sm">
+                <Button variant="outlineGray" size="sm">
                   Reapprove
                 </Button>
               </div>

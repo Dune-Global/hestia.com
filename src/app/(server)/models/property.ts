@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { Gender } from "@/enum/Gender";
-import { PropertyType, ShareType } from "@/enum/Property";
+import { PropertyType, ShareType, PropertyStatus } from "@/enum/Property";
 import LandLordModel from "./landLord";
 
 const googleMapLocationSchema = new mongoose.Schema({
@@ -58,8 +58,14 @@ const propertySchema = new mongoose.Schema({
     enum: Gender,
   },
   basics: basicsSchema,
-});
+  status: {
+    type: String,
+    enum: PropertyStatus,
+    default: PropertyStatus.Available,
+  },
+}, { timestamps: true }); // Add this line
 
-const Property = mongoose.model("Property", propertySchema);
+const Property =
+  mongoose.models.Property || mongoose.model("Property", propertySchema);
 
 export default Property;

@@ -15,7 +15,7 @@ export default function SignIn() {
       sessionStatus === "authenticated" &&
       session?.user?.role === UserRoles.ADMIN
     ) {
-      redirect("./");
+      redirect("./dashboard");
     }
   }, [session, sessionStatus]);
 

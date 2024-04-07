@@ -13,3 +13,6 @@ export { TVIcon } from "./tv";
 export { WifiIcon } from "./wifi";
 export { SharedIcon } from "./shared-room";
 export { PrivateIcon } from "./private-room";
+export { MaleIcon } from "./la_male";
+export { FemaleIcon } from "./la_female";
+export { BothGendersIcon } from "./la_both";

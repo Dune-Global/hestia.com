@@ -55,10 +55,6 @@ export default function GoogleMapView() {
                             <div>
                                 <MarkerF
                                     position={userLocation}
-                                    icon={{
-                                        url: 'https://cdn-icons-png.flaticon.com/512/1365/1365700.png',
-                                        scaledSize: new window.google.maps.Size(50, 50)
-                                    }}
                                     onClick={() => {
                                         console.log("This is lt lg from user location", userLocation)
                                     }}

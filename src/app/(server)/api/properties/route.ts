@@ -49,7 +49,7 @@ export const GET = async (request: NextRequest) => {
     const query: any = {};
     if (propertyType) query.propertyType = propertyType;
     if (shareType) query.shareType = shareType;
-    query.status = PropertyStatus.Available;
+    query.status = PropertyStatus.Approved;
 
     const properties = await Property.find(query).populate(
       "landlord",

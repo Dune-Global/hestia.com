@@ -29,12 +29,7 @@ export const GET = async (request: NextRequest) => {
     }
 
     if (!propertyStatus) {
-      return NextResponse.json(
-        {},
-        {
-          status: HttpStatusCode.BadRequest,
-        }
-      );
+      query._id = id;
     }
 
     const property = await Property.find(query).populate({ path: 'landlord', select: '-password -role' });

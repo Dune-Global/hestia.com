@@ -1,18 +1,59 @@
 "use client"
 
+import React, { useEffect, useState } from 'react'
 import FeatureCard from '@/components/common/cards/FeatureCard'
 import PageHeader from '@/components/common/layout/PageHeader'
 import HostelGallery from '@/components/landLord/HostelGallery'
 import HostelPerks from '@/components/landLord/HostelPerks'
 import LandlordBookingRequestCard from '@/components/landLord/LandlordBookingRequestCard'
-import React from 'react'
+import { getPropertyById } from '@/helpers/api/landlord/getPropertyById'
+import GoogleMapView from '@/components/common/maps/GoogleMapView'
 
-export default function page({ params }: { params: { slug: string } }) {
+export default function ApprovedPropertyDetailsPage({ params }: Readonly<{ params: { slug: string } }>) {
+    const [propertyName, setPropertyName] = useState<string>()
+    const [propertyDescription, setPropertyDescription] = useState<string>();
+    const [imageUrls, setImageUrls] = useState<string[]>([])
+    const [propertyLocation, setPropertyLocation] = useState<string>()
+    const [guests, setGuests] = useState<number>()
+    const [bedrooms, setBedrooms] = useState<number>()
+    const [bedsPerRoom, setBedsPerRoom] = useState<number>()
+    const [bathrooms, setBathrooms] = useState<number>()
+
+    useEffect(() => {
+        const fetchDetails = async () => {
+            try {
+                const res = await getPropertyById(params.slug, "approved")
+                console.log("lati from details", res.property[0].address.googleMapLocation.latitude)
+                console.log("longi from details", res.property[0].address.googleMapLocation.longitude)
+                setPropertyName(res.property[0].name)
+                setPropertyDescription(res.property[0].description)
+                setImageUrls(res.property[0].images)
+                setPropertyLocation(res.property[0].address.city)
+                setGuests(res.property[0].basics.guests)
+                setBedrooms(res.property[0].basics.bedrooms)
+                setBedsPerRoom(res.property[0].basics.bedsPerRoom)
+                setBathrooms(res.property[0].basics.bathrooms)
+
+            } catch (error) {
+                console.log("error from details", error)
+            }
+        }
+
+        fetchDetails();
+    }, [])
+
     return (
         <>
-            <PageHeader title={params.slug} isSearch={false} />
+            <PageHeader title={propertyName!} isSearch={false} />
             <div>
-                <HostelGallery />
+                <HostelGallery
+                    images={imageUrls}
+                    propertyLocation={propertyLocation!}
+                    guests={guests}
+                    bedrooms={bedrooms}
+                    bedsPerRoom={bedsPerRoom}
+                    bathRooms={bathrooms}
+                />
 
                 <div className='flex flex-col lg:flex-row lg:justify-between lg:gap-10'>
 
@@ -62,13 +103,17 @@ export default function page({ params }: { params: { slug: string } }) {
 
                 <div>
                     <h2 className='font-bold text-xl md:text-2xl md:py-2'>Description</h2>
-                    <div className='flex flex-col gap-2 py-5'>
+                    <div className='flex flex-col gap-2 py-3'>
                         <p className='text-sm md:text-base'>
-                            Our luxurious villa "Green Parrot Beachvilla" is situated directly on a deserted long sandy beach. The "Green Parrot Beachvilla" for 4 persons 2 bedrooms, 2 bathrooms, luxurious living room and dining room with sea view, covered, wind-protected terrace, swimming pool 11 x 4 m and large garden was built in 2014 in European-Singhalese co-production according to international standards and is now under Sinhalese-German management.
+                            {propertyDescription}
                         </p>
-                        <p className='text-sm md:text-base'>
-                            For more than 4 guests bookable in separate advertisement "Green Parrot Beach Villa & Cube", the Green Parrot Beach Villa has been extended in August 2019 by another, independent building for 2 persons, the "Cube". In this building there is 1 large bedroom with a covered balcony and a fantastic view of the garden and the sea, 1 bathroom, 1 living room with kitchenette and dining area, 1 covered, wind-protected terrace with garden and sea view. Both the "Green Parrot Beachvilla" and the "Cube" offer a fantastic view of the large pool, the garden with shady palm trees and the sea
-                        </p>
+                    </div>
+                </div>
+
+                <div className='py-2'>
+                    <h2 className='font-bold text-xl md:text-2xl md:py-3'>Where You Will Be</h2>
+                    <div className='pt-2 pb-10 md:pb-16'>
+                        <GoogleMapView />
                     </div>
                 </div>
             </div>
